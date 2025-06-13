@@ -14,9 +14,9 @@ def q(n):
     return int(n)
 
 
-@pytest.mark.parametrize("file", sorted([
-    file for file in os.listdir(formulae_path) if file.endswith(".pi")
-]))
+@pytest.mark.parametrize(
+    "file", sorted([file for file in os.listdir(formulae_path) if file.endswith(".pi")])
+)
 def test_is_pi(file):
     with open(join(formulae_path, file)) as f:
         _, data, terms = f.read().split("--\n")
@@ -29,5 +29,5 @@ def test_is_pi(file):
         else:
             c = q(term.split("[")[0])
         a = q(term.split("[")[1].split("]")[0])
-        pi += c * math.atan(1/a)
+        pi += c * math.atan(1 / a)
     assert abs(pi - math.pi) < 1e-10
