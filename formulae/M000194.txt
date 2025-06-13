@@ -1,0 +1,7 @@
+--
+reference: ASN (2007-8 - corrected 5Aug13)*1.86105 - 4-term identity)
+--
+16[21]
+3[239]
+4[695/2]
+4[724196]
