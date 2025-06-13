@@ -1,5 +1,6 @@
 --
 reference: STØRMER (1896)
+multiple: 1
 --
 3[3]
 -2[11]

@@ -1,5 +1,6 @@
 --
 reference: MATSUMOTO (2000)
+multiple: 2
 --
 61[38]
 -17[463]

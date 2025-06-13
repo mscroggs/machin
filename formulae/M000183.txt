@@ -1,5 +1,6 @@
 --
 reference: MRW (04Apr97)(12 (integer)-term identity)
+multiple: 2
 --
 893758[1049433]
 655711[1264557]

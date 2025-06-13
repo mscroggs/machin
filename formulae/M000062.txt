@@ -1,5 +1,6 @@
 --
 reference: "ASN/MRW (2Aug10)(*1.60346
+multiple:  ¢¢2.04804)"
 --
 1
 83[239]

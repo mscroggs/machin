@@ -1,5 +1,6 @@
 --
 reference: TAKANO (1982)(¢¢2.37598)
+multiple: 1
 --
 12[49]
 32[57]

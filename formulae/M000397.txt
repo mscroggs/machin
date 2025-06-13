@@ -1,5 +1,6 @@
 --
 reference: EULER (1738 or earlier - published 1744)
+multiple: 1
 --
 4[5]
 1[70]

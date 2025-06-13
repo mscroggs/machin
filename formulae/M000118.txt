@@ -1,5 +1,6 @@
 --
 reference: "ASN (16Sep09)(*1.71075 - v. Arndt
+multiple:  4-term & below)"
 --
 1
 17[23]

@@ -1,5 +1,6 @@
 --
 reference: ASN (6Aug12)
+multiple: 1
 --
 10301[12943]
 -1440[31182]

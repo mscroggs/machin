@@ -1,5 +1,6 @@
 --
 reference: ARNDT (1993)
+multiple: 1
 --
 12[18]
 8[109]

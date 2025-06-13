@@ -1,5 +1,6 @@
 --
 reference: STRASSNITZKY (1844)
+multiple: 1
 --
 [2]
 [5]

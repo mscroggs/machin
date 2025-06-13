@@ -1,5 +1,6 @@
 --
 reference: LEHMER (1938)(*2.24178)
+multiple: 1
 --
 12[18]
 8[99]
