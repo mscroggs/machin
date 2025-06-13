@@ -114,7 +114,7 @@ for file in os.listdir(settings.formulae_path):
         else:
             content = heading("h1", f"{pi.code}: {pi.name}")
 
-        content += f"$${pi.latex_formula}$$"
+        content += f"$$\pi={pi.latex_formula}$$"
 
         content += "<table class='formula'>"
         content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
