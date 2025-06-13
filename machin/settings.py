@@ -2,7 +2,6 @@
 
 import os as _os
 
-import yaml as _yaml
 from webtools import settings
 from webtools.tools import join as _join
 

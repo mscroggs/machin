@@ -10,7 +10,6 @@ import sympy
 import yaml
 from machin import settings
 from webtools.citations import make_bibtex, markup_citation
-from webtools.tools import html_local
 
 
 def load_value(n: str) -> sympy.core.expr.Expr:
@@ -80,13 +79,13 @@ class Formula:
                 if out != "":
                     out += "+"
                 out += as_latex(coeff)
-            out += f"\\arctan\\left({as_latex(1/arctan)}\\right)"
+            out += f"\\arctan\\left({as_latex(1 / arctan)}\\right)"
         return out
 
     @property
     def lehmer_measure(self) -> float:
         """Lehmer's measure."""
-        return sum(1/math.log10(float(i)) for _, i in self._terms)
+        return sum(1 / math.log10(float(i)) for _, i in self._terms)
 
     @property
     def compact_formula(self) -> str:
@@ -116,7 +115,7 @@ class Formula:
         match format:
             case "HTML":
                 return "<br />".join(
-                    f"<div class='citation'>{to_html(markup_citation(r))}</div>"
+                    f"<div class='citation'>{markup_citation(r)}</div>"
                     for r in self._references
                 )
             case "BibTeX":

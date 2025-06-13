@@ -9,7 +9,7 @@ from datetime import datetime
 from machin import settings
 from machin.formulae import load_formula
 from webtools.html import make_html_page
-from webtools.markup import heading, heading_with_self_ref, markup
+from webtools.markup import heading, markup
 from webtools.tools import html_local, join, parse_metadata
 
 start_all = datetime.now()
@@ -17,15 +17,26 @@ path = os.path.dirname(os.path.realpath(__file__))
 settings.set_root_path(join(path))
 
 parser = argparse.ArgumentParser(description="Build website")
-parser.add_argument('destination', metavar='destination', nargs="?",
-                    default=None, help="Destination of HTML files.")
-parser.add_argument('--github-token', metavar="github_token", default=None,
-                    help="Provide a GitHub token to get update timestamps.")
+parser.add_argument(
+    "destination",
+    metavar="destination",
+    nargs="?",
+    default=None,
+    help="Destination of HTML files.",
+)
+parser.add_argument(
+    "--github-token",
+    metavar="github_token",
+    default=None,
+    help="Provide a GitHub token to get update timestamps.",
+)
 
 sitemap = {}
 
 
-def write_html_page(path: str, title: str, content: str, include_in_sitemap: bool = True):
+def write_html_page(
+    path: str, title: str, content: str, include_in_sitemap: bool = True
+):
     """Write a HTML page.
 
     Args:
@@ -106,14 +117,15 @@ for file in os.listdir(settings.formulae_path):
             content += row(
                 "References",
                 f"{pi.references('HTML')}<br /><div class='citation'>"
-                f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
+                f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
             )
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
                 f.write(bib)
         content += "</table>"
 
-        write_html_page(join(rpath, "index.html"),
-                        f"{formula}: {pi.html_name}", content)
+        write_html_page(
+            join(rpath, "index.html"), f"{formula}: {pi.html_name}", content
+        )
         end = datetime.now()
         print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
@@ -137,8 +149,11 @@ def make_pages(sub_dir=""):
             content = content.replace("](pages/", "](")
             content = markup(content, sub_dir)
 
-            write_html_page(join(settings.html_path, sub_dir, f"{fname}.html"),
-                            metadata["title"], content)
+            write_html_page(
+                join(settings.html_path, sub_dir, f"{fname}.html"),
+                metadata["title"],
+                content,
+            )
             end = datetime.now()
             print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
@@ -150,9 +165,8 @@ def make_index_page(
     formulae: typing.List[typing.Tuple[str, str]],
     pagename: str,
     title: str,
-    per_page: int = 50
+    per_page: int = 50,
 ):
-
     content = heading("h1", title)
     if len(formulae) > per_page:
         content += (
@@ -197,14 +211,16 @@ def make_index_page(
     content += "</div>"
 
     for i, start in enumerate(range(0, len(formulae), per_page)):
-        with open(join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w") as f:
+        with open(
+            join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w"
+        ) as f:
             if i > 0:
                 f.write(
                     "<div class='nextlink'><a href='javascript:prev_page()'>"
                     f"&larr; Previous {per_page} formulae</a></div>"
                 )
             f.write("<ul>")
-            for url, name in formulae[start:start + per_page]:
+            for url, name in formulae[start : start + per_page]:
                 f.write(f"<li><a href='{url}'>{name}</a></li>")
             f.write("</ul>")
             if len(formulae) > start + per_page:
@@ -214,9 +230,9 @@ def make_index_page(
                 )
 
     write_html_page(
-        join(settings.html_path, "formulae", f"{pagename}.html"),
-        title,
-        content)
+        join(settings.html_path, "formulae", f"{pagename}.html"), title, content
+    )
+
 
 # Alphabetical
 named_formulae_for_index.sort(key=lambda i: i[1].lower())
@@ -252,7 +268,7 @@ def list_pages(folder: str) -> str:
         items.append(("A", "<li><a href='/index.html'>Front page</a>"))
     for i, j in sitemap.items():
         if i.startswith(folder):
-            file = i[len(folder) + 1:]
+            file = i[len(folder) + 1 :]
             if "/" in file:
                 subfolder, subfile = file.split("/", 1)
                 if subfile == "index.html":
