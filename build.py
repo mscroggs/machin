@@ -1,0 +1,278 @@
+"""Build website."""
+
+import argparse
+import typing
+import os
+import re
+from datetime import datetime
+
+from machin import settings
+from machin.formulae import load_formula
+from webtools.html import make_html_page
+from webtools.markup import heading, heading_with_self_ref, markup
+from webtools.tools import html_local, join, parse_metadata
+
+start_all = datetime.now()
+path = os.path.dirname(os.path.realpath(__file__))
+settings.set_root_path(join(path))
+
+parser = argparse.ArgumentParser(description="Build website")
+parser.add_argument('destination', metavar='destination', nargs="?",
+                    default=None, help="Destination of HTML files.")
+parser.add_argument('--github-token', metavar="github_token", default=None,
+                    help="Provide a GitHub token to get update timestamps.")
+
+sitemap = {}
+
+
+def write_html_page(path: str, title: str, content: str, include_in_sitemap: bool = True):
+    """Write a HTML page.
+
+    Args:
+        path: Page path
+        title: Page title
+        content: Page content
+        include_in_sitemap: Should this page be included in the list of all pages?
+    """
+    global sitemap
+    assert html_local(path) not in sitemap
+    if include_in_sitemap:
+        sitemap[html_local(path)] = title
+    with open(path, "w") as f:
+        f.write(make_html_page(content, title))
+
+
+def load_md_file(matches):
+    """Read the content of a markdown file."""
+    with open(join(settings.root_path, matches[1])) as f:
+        return f.read()
+
+
+args = parser.parse_args()
+if args.destination is not None:
+    settings.set_html_path(args.destination)
+if args.github_token is not None:
+    settings.set_github_token(args.github_token)
+
+# Prepare paths
+if os.path.isdir(settings.html_path):
+    os.system(f"rm -rf {settings.html_path}")
+os.mkdir(settings.html_path)
+os.mkdir(join(settings.html_path, "formulae"))
+
+os.system(f"cp -r {settings.files_path}/* {settings.html_path}")
+
+
+def row(name, content):
+    """Make a row of information."""
+    if content == "":
+        return ""
+    else:
+        return f"<tr><td>{name.replace(' ', '&nbsp;')}</td><td>{content}</td>"
+
+
+formulae = []
+formulae_for_index = []
+named_formulae_for_index = []
+
+# Make formula pages
+for file in os.listdir(settings.formulae_path):
+    if file.endswith(".pi"):
+        start = datetime.now()
+        formula = file[:-3]
+        print(f"{formula}.html", end="", flush=True)
+        pi = load_formula(formula)
+        rpath = join(settings.html_path, formula)
+        os.mkdir(rpath)
+
+        formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
+        if pi.name is not None:
+            named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
+        formulae.append(pi)
+
+        if pi.name is None:
+            content = heading("h1", f"{pi.code}")
+        else:
+            content = heading("h1", f"{pi.code}: {pi.name}")
+
+        content += f"$${pi.latex_formula}$$"
+
+        content += "<table class='formula'>"
+        content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
+        content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:6])
+        content += row("Notes", pi.notes("HTML"))
+        bib = pi.references("BibTeX")
+        if bib != "":
+            content += row(
+                "References",
+                f"{pi.references('HTML')}<br /><div class='citation'>"
+                f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
+            )
+            with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
+                f.write(bib)
+        content += "</table>"
+
+        write_html_page(join(rpath, "index.html"),
+                        f"{formula}: {pi.html_name}", content)
+        end = datetime.now()
+        print(f" (completed in {(end - start).total_seconds():.2f}s)")
+
+
+# Make pages
+def make_pages(sub_dir=""):
+    """Make pages recursively."""
+    for file in os.listdir(join(settings.pages_path, sub_dir)):
+        if os.path.isdir(join(settings.pages_path, sub_dir, file)):
+            os.mkdir(join(settings.html_path, sub_dir, file))
+            make_pages(join(sub_dir, file))
+        elif file.endswith(".md"):
+            start = datetime.now()
+            fname = file[:-3]
+            print(f"{sub_dir}/{fname}.html", end="", flush=True)
+            with open(join(settings.pages_path, sub_dir, file)) as f:
+                metadata, content = parse_metadata(f.read())
+
+            content = re.sub(r"\{\{(.+\.md)\}\}", load_md_file, content)
+            content = content.replace("`--`", "`&#8209;&#8209;`")
+            content = content.replace("](pages/", "](")
+            content = markup(content, sub_dir)
+
+            write_html_page(join(settings.html_path, sub_dir, f"{fname}.html"),
+                            metadata["title"], content)
+            end = datetime.now()
+            print(f" (completed in {(end - start).total_seconds():.2f}s)")
+
+
+make_pages()
+
+
+def make_index_page(
+    formulae: typing.List[typing.Tuple[str, str]],
+    pagename: str,
+    title: str,
+    per_page: int = 50
+):
+
+    content = heading("h1", title)
+    if len(formulae) > per_page:
+        content += (
+            "<script type='text/javascript'>\n"
+            "var cpage = 0;\n"
+            "function change_page() {\n"
+            "    document.getElementById('pagelist').innerHTML = '';\n"
+            "    var ajax;\n"
+            "    if(window.XMLHttpRequest){\n"
+            "        ajax=new XMLHttpRequest();\n"
+            "    } else {\n"
+            "        ajax=new ActiveXObject('Microsoft.XMLHTTP');\n"
+            "    }\n"
+            "    ajax.onreadystatechange=function(){\n"
+            "        if(ajax.readyState==4 && ajax.status==200){\n"
+            "            document.getElementById('pagelist').innerHTML = ajax.responseText;\n"
+            "        }\n"
+            "    }\n"
+            f"    ajax.open('GET', '/formulae/{pagename}-' + cpage + '.html', true);\n"
+            f"    ajax.send();\n"
+            "}\n"
+            "function next_page() {\n"
+            "    cpage++;\n"
+            "    change_page();\n"
+            "}\n"
+            "function prev_page() {\n"
+            "    cpage--;\n"
+            "    change_page();\n"
+            "}\n"
+            "</script>"
+        )
+    content += "<div id='pagelist'>"
+    content += "<ul>"
+    for url, name in formulae[:per_page]:
+        content += f"<li><a href='{url}'>{name}</a></li>"
+    content += "</ul>"
+    if len(formulae) > per_page:
+        content += (
+            "<div class='nextlink'><a href='javascript:next_page()'>"
+            f"Next {per_page} formulae &rarr;</a></div>"
+        )
+    content += "</div>"
+
+    for i, start in enumerate(range(0, len(formulae), per_page)):
+        with open(join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w") as f:
+            if i > 0:
+                f.write(
+                    "<div class='nextlink'><a href='javascript:prev_page()'>"
+                    f"&larr; Previous {per_page} formulae</a></div>"
+                )
+            f.write("<ul>")
+            for url, name in formulae[start:start + per_page]:
+                f.write(f"<li><a href='{url}'>{name}</a></li>")
+            f.write("</ul>")
+            if len(formulae) > start + per_page:
+                f.write(
+                    "<div class='nextlink'><a href='javascript:next_page()'>"
+                    f"Next {per_page} formulae &rarr;</a></div>"
+                )
+
+    write_html_page(
+        join(settings.html_path, "formulae", f"{pagename}.html"),
+        title,
+        content)
+
+# Alphabetical
+named_formulae_for_index.sort(key=lambda i: i[1].lower())
+make_index_page(
+    [(url, f"{name} ({code})") for code, name, url in named_formulae_for_index],
+    "alpha",
+    "List of named Machin-like formulae (alphebetical)",
+)
+
+# Formulae by index
+formulae_for_index.sort(key=lambda i: i[0])
+make_index_page(
+    [(url, f"{code}: {name}") for code, name, url in formulae_for_index],
+    "index",
+    "List of Machin-like formulae (by index)",
+)
+
+# Site map
+sitemap[html_local(join(settings.html_path, "sitemap.html"))] = "List of all pages"
+
+
+def list_pages(folder: str) -> str:
+    """Create list of pages in a folder.
+
+    Args:
+        folder: The folder
+
+    Returns:
+        List of pages
+    """
+    items = []
+    if folder == "":
+        items.append(("A", "<li><a href='/index.html'>Front page</a>"))
+    for i, j in sitemap.items():
+        if i.startswith(folder):
+            file = i[len(folder) + 1:]
+            if "/" in file:
+                subfolder, subfile = file.split("/", 1)
+                if subfile == "index.html":
+                    items.append((j.lower(), list_pages(f"{folder}/{subfolder}")))
+            elif file != "index.html":
+                items.append((j.lower(), f"<li><a href='{i}'>{j}</a></li>"))
+    items.sort(key=lambda a: a[0])
+    out = ""
+    if folder != "":
+        title = sitemap[f"{folder}/index.html"]
+        out += f"<li><a href='{folder}/index.html'>{title}</a>"
+    out += "<ul>" + "\n".join(i[1] for i in items) + "</ul>"
+    if folder != "":
+        out += "</li>"
+    return out
+
+
+content = heading("h1", "List of all pages") + list_pages("")
+with open(join(settings.html_path, "sitemap.html"), "w") as f:
+    f.write(make_html_page(content))
+
+end_all = datetime.now()
+print(f"Total time: {(end_all - start_all).total_seconds():.2f}s")

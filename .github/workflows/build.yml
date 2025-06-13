@@ -1,0 +1,54 @@
+name: Build and deploy website
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+jobs:
+  build-website:
+    name: Build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/checkout@v4
+
+      - run: python3 -m pip install -r requirements.txt
+        name: Install requirements
+      - run: python3 build.py _html --github-token ${{ secrets.GITHUB_TOKEN }} --processes 4
+        name: Build website HTML
+        if: ${{ !github.event.pull_request.head.repo.fork }}
+      - run: python3 build.py _html --processes 4
+        name: Build website HTML
+        if: ${{ github.event.pull_request.head.repo.fork }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        if: github.ref == 'refs/heads/main'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_html'
+        if: github.ref == 'refs/heads/main'
+
+  deploy-website:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - build-website
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

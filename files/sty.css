@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+:root {
+  --headercolor: #FF8200;
+  --titlecolor: #0A0903;
+  --highlightcolor: #FF0000;
+}
+
+
+@media (min-width:500px){
+  #sideplots {display:block}
+}
+@media (max-width:500px){
+  #sideplots {display:none}
+}
+
+body {padding:0px;margin:0px; margin-bottom:100px}
+
+.head, .body, .footer {width:100%;}
+
+.footer {position:fixed;bottom:0;font-size:14px;text-align:center}
+
+a, a:link, a:active, a:visited {color:var(--titlecolor)}
+
+.content {max-width:740px;margin:auto;padding:35px 10px;background-color:rgba(255,255,255,0.9)}
+.footer .content {padding:10px}
+.footer .content a {margin-right:10px;margin-left:10px}
+
+.head, .footer {font-family: 'Gabarito', sans-serif;font-weight:400;background-color:var(--headercolor);}
+
+.title {text-align:center;font-size:45px}
+.head a {color:black;text-decoration:none}
+a.toggler {font-size:80%}
+
+h2 {margin-top:50px}
+h1, h2, h3, h4, h5, h6 {font-family: 'Gabarito', sans-serif;font-weight:400;color:var(--titlecolor)}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {text-decoration:none}
+body, p {font-family:sans}
+p {text-align:justify}
+
+
+li {margin-bottom:10px;margin-top:10px}
+
+table.bordered, table.bordered tr, table.bordered td
+    {border:1px solid #AAAAAA;border-collapse:collapse}
+table.bordered td {padding:2px 6px;text-align:center}
+table.bordered thead {font-weight:bold;font-size:80%}
+
+table.bordered.align-left td {padding:2px 6px;text-align:left}
+table.bordered.align-right td {padding:2px 6px;text-align:right}
+
+.footer a:hover,
+.head a:hover,
+a:hover {color:var(--highlightcolor)}
+
+table.formula {width:100%}
+table.formula, table.formula tr, table.formula td, table.formula tr td
+    {border-collapse:collapsed}
+table.formula tr td {border-bottom:2px dashed #AAAAAA}
+table.formula tr:last-of-type td {border-bottom:none}
+table.formula td {padding:8px 0px}
+table.formula tr td:first-of-type {padding-right:10px;font-variant:all-small-caps; width:1px}
+
+.small-note {font-size:80%;margin-top:10px}
+
+.citation {font-size:80%}
+p.pcode {margin-left:50px;margin-right:50px;font-family:monospace;white-space:nowrap;}
+a.more {display:block;margin-top:20px;font-family: 'Gabarito', sans-serif;font-weight:400;margin-bottom:30px}

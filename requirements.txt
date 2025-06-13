@@ -2,4 +2,5 @@ PyGithub
 pytz
 pytest
 pyyaml
+sympy
 git+https://github.com/DefElement/website-build-tools.git
