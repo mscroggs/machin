@@ -14,9 +14,9 @@ def q(n):
     return int(n)
 
 
-@pytest.mark.parametrize("file", [
+@pytest.mark.parametrize("file", sorted([
     file for file in os.listdir(formulae_path) if file.endswith(".pi")
-])
+]))
 def test_is_pi(file):
     with open(join(formulae_path, file)) as f:
         _, data, terms = f.read().split("--\n")
