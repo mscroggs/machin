@@ -1,8 +1,7 @@
 --
-reference: ASN (2007-8 - corrected 5Aug13)*1.86105 - 4-term identity)
-multiple: 1
+reference: "ASN (2007-8 - corrected 5Aug13)*1.86105 - 4-term identity)"
 --
-16[21]
-3[239]
-4[695/2]
-4[724196]
+64[21]
+12[239]
+16[695/2]
+16[724196]

@@ -1,7 +1,6 @@
 --
-reference: WRENCH (1938)
-multiple: 2
+reference: "WRENCH (1938)"
 --
-5[3]
--2[53]
-1[4443]
+10[3]
+-4[53]
+2[4443]

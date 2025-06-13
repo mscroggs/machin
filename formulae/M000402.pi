@@ -1,7 +1,6 @@
 --
-reference: STØRMER (1896)
-multiple: 1
+reference: "STØRMER (1896)"
 --
-4[5]
-1[41]
-2[99]
+16[5]
+4[41]
+8[99]
