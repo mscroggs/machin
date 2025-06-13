@@ -11,6 +11,7 @@ files_path = ""
 pages_path = ""
 formulae_path = ""
 html_path = ""
+local_prefix: str | None = None
 
 github_token: str | None = None
 
@@ -65,6 +66,12 @@ def set_github_token(token: str):
     global github_token
     github_token = token
     settings.github_token = token
+
+def set_local_prefix(prefix: str):
+    """Set GitHub token."""
+    global github_token
+    local_prefix = prefix
+    settings.local_prefix = prefix
 
 
 if _os.path.isfile(

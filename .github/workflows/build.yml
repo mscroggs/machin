@@ -21,10 +21,10 @@ jobs:
 
       - run: python3 -m pip install -r requirements.txt
         name: Install requirements
-      - run: python3 build.py _html --github-token ${{ secrets.GITHUB_TOKEN }}
+      - run: python3 build.py _html --github-token ${{ secrets.GITHUB_TOKEN }} --local-prefix machin
         name: Build website HTML
         if: ${{ !github.event.pull_request.head.repo.fork }}
-      - run: python3 build.py _html
+      - run: python3 build.py _html --local-prefix machin
         name: Build website HTML
         if: ${{ github.event.pull_request.head.repo.fork }}
 

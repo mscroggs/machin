@@ -30,6 +30,12 @@ parser.add_argument(
     default=None,
     help="Provide a GitHub token to get update timestamps.",
 )
+parser.add_argument(
+    "--local-prefix",
+    metavar="local_prefix",
+    default=None,
+    help="Provide a GitHub token to get update timestamps.",
+)
 
 sitemap = {}
 
@@ -64,6 +70,8 @@ if args.destination is not None:
     settings.set_html_path(args.destination)
 if args.github_token is not None:
     settings.set_github_token(args.github_token)
+if args.local_prefix is not None:
+    settings.set_local_prefix(args.local_prefix)
 
 # Prepare paths
 if os.path.isdir(settings.html_path):
