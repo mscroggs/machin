@@ -1,4 +1,5 @@
 PyGithub
 pytz
+pytest
 pyyaml
 git+https://github.com/DefElement/website-build-tools.git
