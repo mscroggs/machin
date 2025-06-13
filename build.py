@@ -193,6 +193,15 @@ def make_index_page(
             "            document.getElementById('pagelist').innerHTML = ajax.responseText;\n"
             "        }\n"
             "    }\n"
+        )
+        if settings.local_prefix is None:
+            content += f"    ajax.open('GET', '/formulae/{pagename}-' + cpage + '.html', true);\n"
+        else:
+            content += (
+                f"    ajax.open('GET', '/{settings.local_prefix}/formulae/{pagename}-'"
+                " + cpage + '.html', true);\n"
+            )
+        content += (
             f"    ajax.open('GET', '/formulae/{pagename}-' + cpage + '.html', true);\n"
             f"    ajax.send();\n"
             "}\n"
