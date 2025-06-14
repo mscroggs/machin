@@ -52,7 +52,7 @@ class Formula:
         assert re.match(r"M[0-9]{6}", code)
         self.code = code
         self.index = int(code[1:])
-        self._terms = terms
+        self.terms = terms
         self._notes = notes
         self._name = name
         self._references = []
@@ -79,7 +79,7 @@ class Formula:
     def latex_formula(self) -> str:
         """Formula as LaTeX."""
         out = ""
-        for coeff, arctan in self._terms:
+        for coeff, arctan in self.terms:
             if coeff < 0:
                 out += as_latex(coeff)
             else:
@@ -92,12 +92,12 @@ class Formula:
     @property
     def lehmer_measure(self) -> float:
         """Lehmer's measure."""
-        return sum(1 / math.log10(float(i)) for _, i in self._terms)
+        return sum(1 / math.log10(float(i)) for _, i in self.terms)
 
     @property
     def compact_formula(self) -> str:
         out = ""
-        for coeff, arctan in self._terms:
+        for coeff, arctan in self.terms:
             if coeff < 0:
                 if out != "":
                     out += " "
