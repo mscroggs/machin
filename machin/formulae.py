@@ -5,7 +5,7 @@ import os
 import re
 import typing
 
-import sympy
+import sympy  # type: ignore
 
 import yaml
 from machin import settings
