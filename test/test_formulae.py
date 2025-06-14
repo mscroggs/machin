@@ -6,19 +6,29 @@ from machin.formulae import load_formula
 from webtools.tools import join
 
 formulae_path = join(os.path.dirname(os.path.realpath(__file__)), "..", "formulae")
+ids = sorted([file[:-3] for file in os.listdir(formulae_path) if file.endswith(".pi")])
 
 
-def q(n):
-    if "/" in n:
-        a, b = [int(i) for i in n.split("/")]
-        return a / b
-    return int(n)
-
-
-@pytest.mark.parametrize(
-    "file", sorted([file for file in os.listdir(formulae_path) if file.endswith(".pi")])
-)
-def test_is_pi(file):
-    formula = load_formula(file[:-3])
+@pytest.mark.parametrize("id", ids)
+def test_is_pi(id):
+    formula = load_formula(id)
     pi = sum(c * math.atan(1 / a) for c, a in formula.terms)
     assert abs(pi - math.pi) < 1e-10
+
+
+@pytest.mark.parametrize("id", ids)
+def test_terms_in_order(id):
+    formula = load_formula(id)
+    for (_, a), (_, b) in zip(formula.terms[:-1], formula.terms[1:]):
+        assert a < b
+
+
+def test_no_repeats():
+    formulae = []
+    for n, i in enumerate(ids):
+        f0 = load_formula(i).compact_formula
+        for i2, f1 in formulae:
+            if f0 == f1:
+                print(f"{i} and {i2} are equal")
+            assert f0 != f1
+        formulae.append((i, f0))
