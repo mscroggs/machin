@@ -115,7 +115,7 @@ for file in os.listdir(settings.formulae_path):
             content = heading("h1", f"{pi.code}: {pi.name}")
 
         content += "<div style='overflow:scroll'>"
-        content += f"$$\pi={pi.latex_formula}$$"
+        content += f"$$\\pi={pi.latex_formula}$$"
         content += "</div>"
 
         content += "<table class='formula'>"
