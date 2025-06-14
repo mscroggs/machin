@@ -25,10 +25,12 @@ def test_terms_in_order(id):
 
 def test_no_repeats():
     formulae = []
+    duplicates = []
     for n, i in enumerate(ids):
         f0 = load_formula(i).compact_formula
         for i2, f1 in formulae:
             if f0 == f1:
                 print(f"{i} and {i2} are equal")
-            assert f0 != f1
+                duplicates.append((i, i2))
         formulae.append((i, f0))
+    assert len(duplicates) == 0
