@@ -1,5 +1,6 @@
 --
-reference: "ASN (7Aug10)"
+references:
+  - "ASN (7Aug10)"
 --
 48000[32807]
 69852[79011/2]

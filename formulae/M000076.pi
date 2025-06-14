@@ -1,5 +1,6 @@
 --
-reference: "ASN (28Jul09)(*1.55630, *1.66383 - both 3-digit)"
+references:
+  - "ASN (28Jul09)(*1.55630, *1.66383 - both 3-digit)"
 --
 3740[1393]
 1288[3748]

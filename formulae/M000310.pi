@@ -1,5 +1,6 @@
 --
-reference: "HCL (26Jan95)(*2.12025)"
+references:
+  - "HCL (26Jan95)(*2.12025)"
 --
 48[18]
 32[75]

@@ -1,5 +1,6 @@
 --
-reference: "CASHMORE"
+references:
+  - "CASHMORE"
 --
 256[80]
 -4[239]

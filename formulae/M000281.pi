@@ -1,5 +1,6 @@
 --
-reference: "HCL (28Sep93)(*1.89498)"
+references:
+  - "HCL (28Sep93)(*1.89498)"
 --
 68[26]
 20[38]

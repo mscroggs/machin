@@ -1,5 +1,6 @@
 --
-reference: "ASN (29Jun09)(*1.86105)"
+references:
+  - "ASN (29Jun09)(*1.86105)"
 --
 64[21]
 12[239]

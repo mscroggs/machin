@@ -1,6 +1,7 @@
 --
 name: Machin's formula
-reference: "*MACHIN (1706)"
+references:
+  - "*MACHIN (1706)"
 --
 16[5]
 -4[239]

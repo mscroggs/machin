@@ -1,5 +1,6 @@
 --
-reference: "HCL (24Jun95)"
+references:
+  - "HCL (24Jun95)"
 --
 136[53]
 60[107]

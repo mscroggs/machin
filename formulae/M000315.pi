@@ -1,5 +1,6 @@
 --
-reference: "HCL (26Jan95)(*2.05885)"
+references:
+  - "HCL (26Jan95)(*2.05885)"
 --
 48[26]
 80[57]

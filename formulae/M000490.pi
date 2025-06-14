@@ -1,5 +1,6 @@
 --
-reference: "HCL (1995)"
+references:
+  - "HCL (1995)"
 --
 136[53]
 60[107]

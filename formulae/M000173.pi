@@ -1,5 +1,6 @@
 --
-reference: "MATSUMOTO (2000)"
+references:
+  - "MATSUMOTO (2000)"
 --
 76[24]
 -16[882]

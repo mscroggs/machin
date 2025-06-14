@@ -1,5 +1,6 @@
 --
-reference: "LEHMER (1938)(*2.24178)"
+references:
+  - "LEHMER (1938)(*2.24178)"
 --
 48[18]
 32[99]

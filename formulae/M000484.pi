@@ -1,5 +1,6 @@
 --
-reference: "HCL (1995)"
+references:
+  - "HCL (1995)"
 --
 732[239]
 128[1023]
