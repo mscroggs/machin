@@ -10,6 +10,7 @@ import sympy
 import yaml
 from machin import settings
 from webtools.citations import make_bibtex, markup_citation
+from webtools.tools import join
 
 
 def load_value(n: str) -> sympy.core.expr.Expr:
@@ -45,7 +46,7 @@ class Formula:
         name: typing.Optional[str],
         terms: typing.List[typing.Tuple[sympy.core.expr.Expr, sympy.core.expr.Expr]],
         notes: typing.List[str],
-        references: typing.List[typing.Dict[str, typing.Any]],
+        references: typing.List[typing.Dict[str, typing.Any] | str],
     ):
         """Create."""
         assert re.match(r"M[0-9]{6}", code)
@@ -54,7 +55,17 @@ class Formula:
         self._terms = terms
         self._notes = notes
         self._name = name
-        self._references = references
+        self._references = []
+        for r in references:
+            if isinstance(r, str):
+                if os.path.isfile(join(settings.references_path, r)):
+                    with open(join(settings.references_path, r)) as f:
+                        self._references.append(yaml.safe_load(f)
+)
+                else:
+                    self._references.append(r)
+            else:
+                self._references.append(r)
 
     @property
     def name(self) -> typing.Optional[str]:
@@ -115,6 +126,8 @@ class Formula:
         match format:
             case "HTML":
                 return "<br />".join(
+                    f"<div class='citation'><code>r</code> (full reference coming soon)</div>"
+                    if isinstance(r, str) else
                     f"<div class='citation'>{markup_citation(r)}</div>"
                     for r in self._references
                 )
@@ -122,6 +135,7 @@ class Formula:
                 return "\n".join(
                     make_bibtex(f"{self.code}-{n + 1}", r) + "\n"
                     for n, r in enumerate(self._references)
+                    if not isinstance(r, str)
                 )
             case _:
                 raise ValueError(f"Unsupported format: {format}")
@@ -130,11 +144,11 @@ class Formula:
 def load_formula(code: str) -> Formula:
     """Load a formula from a file and folder."""
     with open(os.path.join(settings.formulae_path, f"{code}.pi")) as f:
-        _, preamble, terms = f.read().split("--\n")
+        _, preamble, raw_terms = f.read().split("--\n")
     data = yaml.safe_load(preamble)
     terms = [
         (load_value(term.split("[")[0]), load_value(term.split("[")[1][:-1]))
-        for term in terms.strip().split("\n")
+        for term in raw_terms.strip().split("\n")
     ]
 
     return Formula(

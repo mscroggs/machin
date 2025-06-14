@@ -11,6 +11,7 @@ files_path = ""
 pages_path = ""
 formulae_path = ""
 html_path = ""
+references_path = ""
 local_prefix: str | None = None
 
 github_token: str | None = None
@@ -36,12 +37,14 @@ def set_root_path(path: str):
     global pages_path
     global formulae_path
     global html_path
+    global references_path
 
     root_path = path
     template_path = _join(root_path, "template")
     files_path = _join(root_path, "files")
     pages_path = _join(root_path, "pages")
     formulae_path = _join(root_path, "formulae")
+    references_path = _join(root_path, "references")
 
     settings.dir_path = root_path
     settings.template_path = template_path
