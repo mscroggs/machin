@@ -34,3 +34,8 @@ def test_no_repeats():
                 duplicates.append((i, i2))
         formulae.append((i, f0))
     assert len(duplicates) == 0
+
+
+def test_no_gaps():
+    for i in range(1, len(ids) + 1):
+        assert "M" + f"000000{i}"[-6:] in ids
