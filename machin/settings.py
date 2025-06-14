@@ -70,9 +70,10 @@ def set_github_token(token: str):
     github_token = token
     settings.github_token = token
 
+
 def set_local_prefix(prefix: str):
     """Set GitHub token."""
-    global github_token
+    global local_prefix
     local_prefix = prefix
     settings.local_prefix = prefix
 

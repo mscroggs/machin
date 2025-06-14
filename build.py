@@ -125,10 +125,15 @@ for file in os.listdir(settings.formulae_path):
         bib = pi.references("BibTeX")
         html = pi.references("HTML")
         if html != "":
-            content += row("References", html if bib == "" else (
-                f"{html}<br /><div class='citation'>"
-                f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
-            ))
+            content += row(
+                "References",
+                html
+                if bib == ""
+                else (
+                    f"{html}<br /><div class='citation'>"
+                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
+                ),
+            )
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
                 f.write(bib)
         content += "</table>"

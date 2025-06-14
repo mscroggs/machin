@@ -123,8 +123,8 @@ class Formula:
             case "HTML":
                 return "<br />".join(
                     f"<div class='citation'><code>{r}</code> (full reference coming soon)</div>"
-                    if isinstance(r, str) else
-                    f"<div class='citation'>{markup_citation(r)}</div>"
+                    if isinstance(r, str)
+                    else f"<div class='citation'>{markup_citation(r)}</div>"
                     for r in self._references
                 )
             case "BibTeX":
