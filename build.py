@@ -123,12 +123,12 @@ for file in os.listdir(settings.formulae_path):
         content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:6])
         content += row("Notes", pi.notes("HTML"))
         bib = pi.references("BibTeX")
-        if bib != "":
-            content += row(
-                "References",
-                f"{pi.references('HTML')}<br /><div class='citation'>"
+        html = pi.references("HTML")
+        if html != "":
+            content += row("References", html if bib == "" else (
+                f"{html}<br /><div class='citation'>"
                 f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
-            )
+            ))
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
                 f.write(bib)
         content += "</table>"

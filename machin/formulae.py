@@ -57,13 +57,9 @@ class Formula:
         self._name = name
         self._references = []
         for r in references:
-            if isinstance(r, str):
-                if os.path.isfile(join(settings.references_path, r)):
-                    with open(join(settings.references_path, r)) as f:
-                        self._references.append(yaml.safe_load(f)
-)
-                else:
-                    self._references.append(r)
+            if isinstance(r, str) and os.path.isfile(join(settings.references_path, r)):
+                with open(join(settings.references_path, r)) as f:
+                    self._references.append(yaml.safe_load(f))
             else:
                 self._references.append(r)
 
@@ -126,7 +122,7 @@ class Formula:
         match format:
             case "HTML":
                 return "<br />".join(
-                    f"<div class='citation'><code>r</code> (full reference coming soon)</div>"
+                    f"<div class='citation'><code>{r}</code> (full reference coming soon)</div>"
                     if isinstance(r, str) else
                     f"<div class='citation'>{markup_citation(r)}</div>"
                     for r in self._references
