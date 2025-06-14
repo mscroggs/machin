@@ -1,7 +1,6 @@
 import math
 import os
 import pytest
-import yaml
 from machin.formulae import load_formula
 from webtools.tools import join
 
