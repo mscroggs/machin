@@ -19,7 +19,7 @@ github_token: str | None = None
 processes = 1
 
 settings.owners = ["mscroggs"]
-settings.url = "https://mscroggs.github.io/machin"
+settings.url = "https://machin-like.org"
 settings.website_name = [
     "Machin-like formulae",
     "Machin-like formulae",
