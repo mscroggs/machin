@@ -16,7 +16,9 @@ start_all = datetime.now()
 path = os.path.dirname(os.path.realpath(__file__))
 settings.set_root_path(join(path))
 csv_first_line = "code,formula,name,Lehmer's measure,references,notes"
-settings.settings.str_extras.append(("csv-first-line", csv_first_line))
+settings.settings.str_extras.append(("{{csv-first-line}}", csv_first_line))
+settings.settings.str_extras.append(("{{machin-count}}", str(sum(
+    1 for file in os.listdir(settings.formulae_path) if file.endswith(".pi")))))
 
 parser = argparse.ArgumentParser(description="Build website")
 parser.add_argument(
