@@ -112,6 +112,8 @@ class Formula:
     def notes(self, format: str = "HTML"):
         """Get notes."""
         match format:
+            case "txt":
+                return " ".join(self._notes)
             case "HTML":
                 return "<br />".join(self._notes)
             case _:
@@ -124,7 +126,12 @@ class Formula:
                 return "<br />".join(
                     f"<div class='citation'><code>{r}</code> (full reference coming soon)</div>"
                     if isinstance(r, str)
-                    else f"<div class='citation'>{markup_citation(r)}</div>"
+                    else f"<div class='citation'>{markup_citation(r, 'HTML')}</div>"
+                    for r in self._references
+                )
+            case "txt":
+                return " ".join(
+                    f"[{r}]." if isinstance(r, str) else f"{markup_citation(r, 'txt')}."
                     for r in self._references
                 )
             case "BibTeX":
