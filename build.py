@@ -15,6 +15,8 @@ from webtools.tools import html_local, join, parse_metadata
 start_all = datetime.now()
 path = os.path.dirname(os.path.realpath(__file__))
 settings.set_root_path(join(path))
+csv_first_line = "code,formula,name,Lehmer's measure,references,notes"
+settings.settings.str_extras.append(("csv-first-line", csv_first_line))
 
 parser = argparse.ArgumentParser(description="Build website")
 parser.add_argument(
@@ -156,7 +158,7 @@ for file in os.listdir(settings.formulae_path):
 
 csv_rows.sort()
 with open(join(settings.html_path, "formulae.csv"), "w") as f:
-    f.write("code,formula,name,Lehmer's measure,references,notes\n")
+    f.write(f"{csv_first_line}\n")
     f.write("\n".join(csv_rows))
 
 # Make pages
