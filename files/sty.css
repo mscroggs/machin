@@ -3,6 +3,7 @@
 :root {
   --headercolor: #FF8200;
   --titlecolor: #0A0903;
+  --linkcolor: #007DFF;
   --highlightcolor: #FF0000;
 }
 
@@ -20,7 +21,7 @@ body {padding:0px;margin:0px; margin-bottom:100px}
 
 .footer {position:fixed;bottom:0;font-size:14px;text-align:center}
 
-a, a:link, a:active, a:visited {color:var(--titlecolor)}
+a, a:link, a:active, a:visited {color:var(--linkcolor)}
 
 .content {max-width:740px;margin:auto;padding:35px 10px;background-color:rgba(255,255,255,0.9)}
 .footer .content {padding:10px}

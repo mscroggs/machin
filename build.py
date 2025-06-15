@@ -15,6 +15,18 @@ from webtools.tools import html_local, join, parse_metadata
 start_all = datetime.now()
 path = os.path.dirname(os.path.realpath(__file__))
 settings.set_root_path(join(path))
+csv_first_line = "code,formula,name,Lehmer's measure,references,notes"
+settings.settings.str_extras.append(("{{csv-first-line}}", csv_first_line))
+settings.settings.str_extras.append(
+    (
+        "{{machin-count}}",
+        str(
+            sum(
+                1 for file in os.listdir(settings.formulae_path) if file.endswith(".pi")
+            )
+        ),
+    )
+)
 
 parser = argparse.ArgumentParser(description="Build website")
 parser.add_argument(
@@ -93,6 +105,7 @@ def row(name, content):
 formulae = []
 formulae_for_index = []
 named_formulae_for_index = []
+csv_rows = []
 
 # Make formula pages
 for file in os.listdir(settings.formulae_path):
@@ -120,7 +133,7 @@ for file in os.listdir(settings.formulae_path):
 
         content += "<table class='formula'>"
         content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
-        content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:6])
+        content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:7])
         content += row("Notes", pi.notes("HTML"))
         bib = pi.references("BibTeX")
         html = pi.references("HTML")
@@ -138,11 +151,29 @@ for file in os.listdir(settings.formulae_path):
                 f.write(bib)
         content += "</table>"
 
+        csv_rows.append(
+            ",".join(
+                [
+                    pi.code,
+                    pi.compact_formula,
+                    "" if pi.name is None else pi.name,
+                    f"{pi.lehmer_measure}"[:7],
+                    f'"{pi.references("txt")}"',
+                    f'"{pi.notes("txt")}"',
+                ]
+            )
+        )
+
         write_html_page(
             join(rpath, "index.html"), f"{formula}: {pi.html_name}", content
         )
         end = datetime.now()
         print(f" (completed in {(end - start).total_seconds():.2f}s)")
+
+csv_rows.sort()
+with open(join(settings.html_path, "formulae.csv"), "w") as f:
+    f.write(f"{csv_first_line}\n")
+    f.write("\n".join(csv_rows))
 
 
 # Make pages
