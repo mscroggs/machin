@@ -93,6 +93,9 @@ os.mkdir(join(settings.html_path, "formulae"))
 
 os.system(f"cp -r {settings.files_path}/* {settings.html_path}")
 
+with open(os.path.join(settings.html_path, "CNAME"), "w") as f:
+    f.write("machin-like.org")
+
 
 def row(name, content):
     """Make a row of information."""
