@@ -107,6 +107,7 @@ def row(name, content):
 
 formulae = []
 formulae_for_index = []
+formulae_for_lehmer_index = []
 named_formulae_for_index = []
 csv_rows = []
 
@@ -121,6 +122,9 @@ for file in os.listdir(settings.formulae_path):
         os.mkdir(rpath)
 
         formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
+        formulae_for_lehmer_index.append(
+            (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
+        )
         if pi.name is not None:
             named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
         formulae.append(pi)
@@ -323,6 +327,17 @@ make_index_page(
     [(url, f"{code}: {name}") for code, name, url in formulae_for_index],
     "index",
     "List of Machin-like formulae (by index)",
+)
+
+# Formulae by Lehmer measure
+formulae_for_lehmer_index.sort(key=lambda i: i[0])
+make_index_page(
+    [
+        (url, f"{code}: {name} ({str(measure)[:7]})")
+        for measure, code, name, url in formulae_for_lehmer_index
+    ],
+    "lehmer",
+    "List of Machin-like formulae (by Lehmer's measure)",
 )
 
 # Site map

@@ -8,5 +8,6 @@ You can:
 
 * [view the full list of Machin-like formulae](/formulae)
 * [view the list of named Machin-like formulae](/formulae/alpha.html)
+* [view the full list of Machin-like formulae sorted by Lehmer's measure](/formulae/lehmer.html)
 * [view a random Machin-like formula](/random.html)
 * [download a CSV file containing all the formulae](csv.md)
