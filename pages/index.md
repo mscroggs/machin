@@ -8,6 +8,7 @@ This website contains {{machin-count}} Machin-like formulae.
 You can:
 
 * [view the full list of Machin-like formulae](/formulae)
+* [view the full list of Machin-like formulae with integer \(b\)s](/formulae/integer.html)
 * [view the list of named Machin-like formulae](/formulae/alpha.html)
 * [view the full list of Machin-like formulae sorted by Lehmer's measure](/formulae/lehmer.html)
 * [view a random Machin-like formula](/random.html)
@@ -21,3 +22,9 @@ On the page for each Machin-like formula, you will find information about the fo
 * References where the formula was first found.
 
 You can find more information about Machin-like formulae on the [Machin-like formulae page](machin-like.md).
+
+## Acknowledgements
+A large number of the Machin-like formulae included on this website first appeared
+on [Michael Roby Wetherfield & Hwang Chien-lih's Machination site](https://web.archive.org/web/20240204042153/http://www.machination.eclipse.co.uk/),
+which is now only available via the Wayback machine.
+

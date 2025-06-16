@@ -26,6 +26,3 @@ Lehmer's measure is computed using
 $$\sum_i\frac1{\log_{10}\left(\frac1{b_1}\right)}.$$
 For example, for [Machin's formula](/M000001), Lehmer's measure is
 $$\frac1{\log_{10}(5)}+\frac1{\log_{10}(239)}=1.85112$$
-
-## History
-Machin's formula was used by John Machin in 1706 to compute the first 100 digits of &pi;.

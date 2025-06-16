@@ -77,6 +77,14 @@ class Formula:
         return f"<code>{self.compact_formula}</code>"
 
     @property
+    def is_integer(self) -> bool:
+        """Are all the arccotangents integers?"""
+        for _, b in self.terms:
+            if not b.is_integer:
+                return False
+        return True
+
+    @property
     def latex_formula(self) -> str:
         """Formula as LaTeX."""
         out = ""

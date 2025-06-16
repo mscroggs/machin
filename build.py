@@ -107,6 +107,7 @@ def row(name, content):
 
 formulae = []
 formulae_for_index = []
+formulae_for_integer_index = []
 formulae_for_lehmer_index = []
 named_formulae_for_index = []
 csv_rows = []
@@ -122,6 +123,8 @@ for file in os.listdir(settings.formulae_path):
         os.mkdir(rpath)
 
         formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
+        if pi.is_integer:
+            formulae_for_integer_index.append((pi.code, pi.html_name, f"/{formula}"))
         formulae_for_lehmer_index.append(
             (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
         )
@@ -327,6 +330,14 @@ make_index_page(
     [(url, f"{code}: {name}") for code, name, url in formulae_for_index],
     "index",
     "List of Machin-like formulae (by index)",
+)
+
+# Integer formulae by index
+formulae_for_integer_index.sort(key=lambda i: i[0])
+make_index_page(
+    [(url, f"{code}: {name}") for code, name, url in formulae_for_integer_index],
+    "integer",
+    "List of Machin-like formulae with integer arccotangents (by index)",
 )
 
 # Formulae by Lehmer measure
