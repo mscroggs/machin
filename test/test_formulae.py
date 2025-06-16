@@ -38,3 +38,10 @@ def test_no_repeats():
 def test_no_gaps():
     for i in range(1, len(ids) + 1):
         assert "M" + f"000000{i}"[-6:] in ids
+
+
+@pytest.mark.parametrize("id", ids)
+def test_notes_full_stop(id):
+    formula = load_formula(id)
+    for note in formula._notes:
+        assert note.endswith(".")

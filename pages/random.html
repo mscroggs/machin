@@ -1,0 +1,27 @@
+--
+title: Random Machin-like formula
+--
+Loading random formula...
+
+<script type='text/javascript'>
+var n = "" + (1 + Math.floor(Math.random() * {{machin-count}}));
+while (n.length < 6) {
+    n = "0" + n;
+}
+
+var ajax;
+if(window.XMLHttpRequest){
+    ajax=new XMLHttpRequest();
+} else {
+    ajax=new ActiveXObject('Microsoft.XMLHTTP');
+}
+ajax.onreadystatechange=function(){
+    if(ajax.readyState==4 && ajax.status==200){
+        document.body.innerHTML = ajax.responseText;
+        MathJax.typeset()
+    }
+}
+ajax.open('GET', '/M' + n + '/index.html', true);
+ajax.send();
+
+</script>

@@ -107,6 +107,8 @@ def row(name, content):
 
 formulae = []
 formulae_for_index = []
+formulae_for_integer_index = []
+formulae_for_lehmer_index = []
 named_formulae_for_index = []
 csv_rows = []
 
@@ -121,6 +123,11 @@ for file in os.listdir(settings.formulae_path):
         os.mkdir(rpath)
 
         formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
+        if pi.is_integer:
+            formulae_for_integer_index.append((pi.code, pi.html_name, f"/{formula}"))
+        formulae_for_lehmer_index.append(
+            (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
+        )
         if pi.name is not None:
             named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
         formulae.append(pi)
@@ -147,7 +154,7 @@ for file in os.listdir(settings.formulae_path):
                 if bib == ""
                 else (
                     f"{html}<br /><div class='citation'>"
-                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
+                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
                 ),
             )
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
@@ -205,6 +212,24 @@ def make_pages(sub_dir=""):
             )
             end = datetime.now()
             print(f" (completed in {(end - start).total_seconds():.2f}s)")
+        elif file.endswith(".html"):
+            start = datetime.now()
+            print(f"{sub_dir}/{file}", end="", flush=True)
+            with open(join(settings.pages_path, sub_dir, file)) as f:
+                metadata, content = parse_metadata(f.read())
+
+            for a, b in settings.settings.re_extras:
+                content = re.sub(a, b, content)
+            for c, d in settings.settings.str_extras:
+                content = content.replace(c, d)
+
+            write_html_page(
+                join(settings.html_path, sub_dir, file),
+                metadata["title"],
+                content,
+            )
+            end = datetime.now()
+            print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
 
 make_pages()
@@ -243,8 +268,7 @@ def make_index_page(
                 " + cpage + '.html', true);\n"
             )
         content += (
-            f"    ajax.open('GET', '/formulae/{pagename}-' + cpage + '.html', true);\n"
-            f"    ajax.send();\n"
+            "    ajax.send();\n"
             "}\n"
             "function next_page() {\n"
             "    cpage++;\n"
@@ -306,6 +330,25 @@ make_index_page(
     [(url, f"{code}: {name}") for code, name, url in formulae_for_index],
     "index",
     "List of Machin-like formulae (by index)",
+)
+
+# Integer formulae by index
+formulae_for_integer_index.sort(key=lambda i: i[0])
+make_index_page(
+    [(url, f"{code}: {name}") for code, name, url in formulae_for_integer_index],
+    "integer",
+    "List of Machin-like formulae with integer arccotangents (by index)",
+)
+
+# Formulae by Lehmer measure
+formulae_for_lehmer_index.sort(key=lambda i: i[0])
+make_index_page(
+    [
+        (url, f"{code}: {name} ({str(measure)[:7]})")
+        for measure, code, name, url in formulae_for_lehmer_index
+    ],
+    "lehmer",
+    "List of Machin-like formulae (by Lehmer's measure)",
 )
 
 # Site map
