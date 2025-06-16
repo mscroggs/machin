@@ -148,7 +148,7 @@ for file in os.listdir(settings.formulae_path):
                 else (
                     f"{html}<br /><div class='citation'>"
                     f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
-                )
+                ),
             )
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
                 f.write(bib)
@@ -197,7 +197,6 @@ def make_pages(sub_dir=""):
             content = content.replace("`--`", "`&#8209;&#8209;`")
             content = content.replace("](pages/", "](")
             content = markup(content, sub_dir)
-
 
             write_html_page(
                 join(settings.html_path, sub_dir, f"{fname}.html"),
@@ -262,7 +261,7 @@ def make_index_page(
                 " + cpage + '.html', true);\n"
             )
         content += (
-            f"    ajax.send();\n"
+            "    ajax.send();\n"
             "}\n"
             "function next_page() {\n"
             "    cpage++;\n"
