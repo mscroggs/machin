@@ -147,8 +147,8 @@ for file in os.listdir(settings.formulae_path):
                 if bib == ""
                 else (
                     f"{html}<br /><div class='citation'>"
-                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>",
-                ),
+                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
+                )
             )
             with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
                 f.write(bib)
@@ -198,8 +198,27 @@ def make_pages(sub_dir=""):
             content = content.replace("](pages/", "](")
             content = markup(content, sub_dir)
 
+
             write_html_page(
                 join(settings.html_path, sub_dir, f"{fname}.html"),
+                metadata["title"],
+                content,
+            )
+            end = datetime.now()
+            print(f" (completed in {(end - start).total_seconds():.2f}s)")
+        elif file.endswith(".html"):
+            start = datetime.now()
+            print(f"{sub_dir}/{file}", end="", flush=True)
+            with open(join(settings.pages_path, sub_dir, file)) as f:
+                metadata, content = parse_metadata(f.read())
+
+            for a, b in settings.settings.re_extras:
+                content = re.sub(a, b, content)
+            for c, d in settings.settings.str_extras:
+                content = content.replace(c, d)
+
+            write_html_page(
+                join(settings.html_path, sub_dir, file),
                 metadata["title"],
                 content,
             )
@@ -243,7 +262,6 @@ def make_index_page(
                 " + cpage + '.html', true);\n"
             )
         content += (
-            f"    ajax.open('GET', '/formulae/{pagename}-' + cpage + '.html', true);\n"
             f"    ajax.send();\n"
             "}\n"
             "function next_page() {\n"
