@@ -9,6 +9,7 @@ import sympy  # type: ignore
 
 import yaml
 from machin import settings
+from webtools.markup import insert_links
 from webtools.citations import make_bibtex, markup_citation
 from webtools.tools import join
 
@@ -115,7 +116,7 @@ class Formula:
             case "txt":
                 return " ".join(self._notes)
             case "HTML":
-                return "<br />".join(self._notes)
+                return "<br />".join([insert_links(i) for i in self._notes])
             case _:
                 raise ValueError(f"Unsupported format: {format}")
 
