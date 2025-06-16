@@ -142,6 +142,11 @@ for file in os.listdir(settings.formulae_path):
         content += "</div>"
 
         content += "<table class='formula'>"
+        if pi.name is not None:
+            if len(pi.alt_names) == 0:
+                content += row("Name", pi.name)
+            else:
+                content += row("Names", ", ".join([pi.name] + pi.alt_names))
         content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
         content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:7])
         content += row("Notes", pi.notes("HTML"))

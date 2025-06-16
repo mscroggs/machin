@@ -45,6 +45,7 @@ class Formula:
         self,
         code: str,
         name: typing.Optional[str],
+        alt_names: typing.List[str],
         terms: typing.List[typing.Tuple[sympy.core.expr.Expr, sympy.core.expr.Expr]],
         notes: typing.List[str],
         references: typing.List[typing.Dict[str, typing.Any] | str],
@@ -56,6 +57,7 @@ class Formula:
         self.terms = terms
         self._notes = notes
         self._name = name
+        self._alt_names = alt_names
         self._references = []
         for r in references:
             if isinstance(r, str) and os.path.isfile(join(settings.references_path, r)):
@@ -68,6 +70,11 @@ class Formula:
     def name(self) -> typing.Optional[str]:
         """Name."""
         return self._name
+
+    @property
+    def alt_names(self) -> typing.List[str]:
+        """Alternative names."""
+        return self._alt_names
 
     @property
     def html_name(self) -> str:
@@ -166,6 +173,7 @@ def load_formula(code: str) -> Formula:
     return Formula(
         code,
         data["name"] if "name" in data else None,
+        data["alt-names"] if "alt-names" in data else [],
         terms,
         data["notes"] if "notes" in data else [],
         data["references"] if "references" in data else [],
