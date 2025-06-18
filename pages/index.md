@@ -23,6 +23,12 @@ On the page for each Machin-like formula, you will find information about the fo
 
 You can find more information about Machin-like formulae on the [Machin-like formulae page](machin-like.md).
 
+## Contributing
+machin-like.org is generated from the source code hosted in
+[the mscroggs/machin GitHub repository](https://github.com/mscroggs/machin). You can contribute
+by opening issues or making pull requests with suggested changes.
+You can find more information on the [contributing page](contributing.md)
+
 ## Acknowledgements
 A large number of the Machin-like formulae included on this website first appeared
 on [Michael Roby Wetherfield & Hwang Chien-lih's Machination site](https://web.archive.org/web/20240204042153/http://www.machination.eclipse.co.uk/),
