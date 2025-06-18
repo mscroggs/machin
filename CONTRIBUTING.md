@@ -3,7 +3,7 @@
 ## Making suggestions
 
 If you want to report a mistake, suggest a new formula, or suggest any other improvement,
-you can open an issue on the [GitHub issue tracker](https://github.com/mscroggs/machin/issues/new].
+you can open an issue on the [GitHub issue tracker](https://github.com/mscroggs/machin/issues/new).
 
 ## Contributing directly
 
