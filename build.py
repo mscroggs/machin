@@ -148,7 +148,12 @@ for file in os.listdir(settings.formulae_path):
             else:
                 content += row("Names", ", ".join([pi.name] + pi.alt_names))
         content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
-        content += row("Lehmer's measure", f"{pi.lehmer_measure}"[:7])
+        content += row(
+            "Lehmer's measure",
+            "&infin;"
+            if pi.lehmer_measure == "INFINITY"
+            else f"{pi.lehmer_measure}"[:7],
+        )
         content += row("Notes", pi.notes("HTML"))
         bib = pi.references("BibTeX")
         html = pi.references("HTML")
@@ -346,7 +351,12 @@ make_index_page(
 )
 
 # Formulae by Lehmer measure
-formulae_for_lehmer_index.sort(key=lambda i: i[0])
+largest_lehmer = max(
+    i[0] for i in formulae_for_lehmer_index if not isinstance(i[0], str)
+)
+formulae_for_lehmer_index.sort(
+    key=lambda i: largest_lehmer * 2 if i[0] == "INFINITY" else i[0]
+)
 make_index_page(
     [
         (url, f"{code}: {name} ({str(measure)[:7]})")
