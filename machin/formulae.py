@@ -106,8 +106,11 @@ class Formula:
         return out
 
     @property
-    def lehmer_measure(self) -> float:
+    def lehmer_measure(self) -> float | str:
         """Lehmer's measure."""
+        for _, i in self.terms:
+            if i == 1:
+                return "INFINITY"
         return sum(1 / math.log10(float(i)) for _, i in self.terms)
 
     @property
@@ -163,8 +166,13 @@ class Formula:
 def load_formula(code: str) -> Formula:
     """Load a formula from a file and folder."""
     with open(os.path.join(settings.formulae_path, f"{code}.pi")) as f:
-        _, preamble, raw_terms = f.read().split("--\n")
-    data = yaml.safe_load(preamble)
+        content = f.read()
+        if "--\n" in content:
+            _, preamble, raw_terms = content.split("--\n")
+            data = yaml.safe_load(preamble)
+        else:
+            data = {}
+            raw_terms = content
     terms = [
         (load_value(term.split("[")[0]), load_value(term.split("[")[1][:-1]))
         for term in raw_terms.strip().split("\n")
