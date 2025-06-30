@@ -109,7 +109,7 @@ formulae = []
 formulae_for_index = []
 formulae_for_integer_index = []
 formulae_for_lehmer_index = []
-formulae_for_nterms_indices = {}
+formulae_for_nterms_indices: dict[int, list[tuple[str, str, str]]] = {}
 named_formulae_for_index = []
 csv_rows = []
 
