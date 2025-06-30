@@ -109,6 +109,7 @@ formulae = []
 formulae_for_index = []
 formulae_for_integer_index = []
 formulae_for_lehmer_index = []
+formulae_for_nterms_indices: dict[int, list[tuple[str, str, str]]] = {}
 named_formulae_for_index = []
 csv_rows = []
 
@@ -131,6 +132,12 @@ for file in os.listdir(settings.formulae_path):
         if pi.name is not None:
             named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
         formulae.append(pi)
+
+        if len(pi.terms) not in formulae_for_nterms_indices:
+            formulae_for_nterms_indices[len(pi.terms)] = []
+        formulae_for_nterms_indices[len(pi.terms)].append(
+            (pi.code, pi.html_name, f"/{formula}")
+        )
 
         if pi.name is None:
             content = heading("h1", f"{pi.code}")
@@ -209,6 +216,14 @@ def make_pages(sub_dir=""):
             print(f"{sub_dir}/{fname}.html", end="", flush=True)
             with open(join(settings.pages_path, sub_dir, file)) as f:
                 metadata, content = parse_metadata(f.read())
+
+            content = content.replace(
+                "{{ntermslinks}}",
+                ", ".join(
+                    f"[{n} term{'' if n == 1 else 's'}](/formulae/{n}-terms.html)"
+                    for n in sorted(list(formulae_for_nterms_indices.keys()))
+                ),
+            )
 
             content = re.sub(r"\{\{(.+\.md)\}\}", load_md_file, content)
             content = content.replace("`--`", "`&#8209;&#8209;`")
@@ -331,7 +346,7 @@ named_formulae_for_index.sort(key=lambda i: i[1].lower())
 make_index_page(
     [(url, f"{name} ({code})") for code, name, url in named_formulae_for_index],
     "alpha",
-    "List of named Machin-like formulae (alphebetical)",
+    "List of named Machin-like formulae (alphabetical)",
 )
 
 # Formulae by index
@@ -341,6 +356,18 @@ make_index_page(
     "index",
     "List of Machin-like formulae (by index)",
 )
+
+# By number of terms
+for n in sorted(list(formulae_for_nterms_indices.keys())):
+    formulae_for_nterms_indices[n].sort(key=lambda i: i[0].lower())
+    make_index_page(
+        [
+            (url, f"{code}: {name}")
+            for code, name, url in formulae_for_nterms_indices[n]
+        ],
+        f"{n}-terms",
+        f"List of Machin-like formulae with {n} term{'' if n == 1 else 's'}",
+    )
 
 # Integer formulae by index
 formulae_for_integer_index.sort(key=lambda i: i[0])
