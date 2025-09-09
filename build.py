@@ -192,7 +192,7 @@ for file in os.listdir(settings.formulae_path):
         )
 
         write_html_page(
-            join(rpath, "index.html"), f"{formula}: {pi.html_name}", content
+            join(rpath, "index.html"), f"{formula}: {pi.text_name}", content
         )
         end = datetime.now()
         print(f" (completed in {(end - start).total_seconds():.2f}s)")

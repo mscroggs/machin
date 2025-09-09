@@ -84,6 +84,13 @@ class Formula:
         return f"<code>{self.compact_formula}</code>"
 
     @property
+    def text_name(self) -> str:
+        """Text name."""
+        if self.name is not None:
+            return self.name
+        return self.compact_formula
+
+    @property
     def is_integer(self) -> bool:
         """Are all the arccotangents integers?"""
         for _, b in self.terms:
