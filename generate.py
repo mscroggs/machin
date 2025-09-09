@@ -25,7 +25,7 @@ new_formulae = [
 pi_n = len(known_formulae) + 1
 
 for formula in new_formulae:
-    with open("M" + f"000000{pi_n}"[-6:] + ".pi", "w") as f:
+    with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
         for c, a in formula.terms:
             f.write(f"{c}[{1/a}]\n")
     pi_n += 1
