@@ -3,4 +3,5 @@ pytz
 pytest
 pyyaml
 sympy
-git+https://github.com/DefElement/website-build-tools.git
+website-build-tools
+git+https://github.com/mscroggs/arctans.git
