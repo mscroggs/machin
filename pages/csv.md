@@ -11,7 +11,7 @@ represents one formula for pi, with the fields given in the first line separated
 ## Code
 The code of a Machin-like formula is the letter `M` followed by 6 digits.
 The page on this website for a formula can be found at {{url}}/formulae/code,
-for example [/formulae/M000001]({{url}}/fprmulae/M000001).
+for example [{{url}}/formulae/M000001](/formulae/M000001).
 
 ## Formula
 In the CSV file, the formula for a Machin-like formula written using
