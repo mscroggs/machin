@@ -25,7 +25,7 @@ pi_n = len(known_formulae) + 1
 
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
-        for c, a in formula.terms:
+        for c, a in sorted(formula.terms, key=lambda ff: 1 / ff[1]):
             f.write(f"{c}[{1 / a}]\n")
     pi_n += 1
 print(f"Found {len(new_formulae)} new formulae for pi")
