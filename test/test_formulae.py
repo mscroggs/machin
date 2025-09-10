@@ -36,7 +36,7 @@ def test_no_repeats():
 
 
 def test_no_gaps():
-    for i in range(1, len(ids) + 1):
+    for i, _ in enumerate(ids):
         assert "M" + f"000000{i}"[-6:] in ids
 
 
