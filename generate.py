@@ -21,7 +21,7 @@ for formula in known_formulae:
 new_formulae = generate(known_formulae, max_terms=8, max_coefficient_denominator=1)
 new_formulae = [formula for formula in new_formulae if 1 not in formula.term_dict]
 
-pi_n = len(known_formulae) + 1
+pi_n = len(known_formulae)
 
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
