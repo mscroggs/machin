@@ -131,12 +131,8 @@ for file in os.listdir(settings.formulae_path):
         formulae_for_lehmer_index.append(
             (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
         )
-        formulae_for_min_b_index.append(
-            (pi.terms[0][1], pi.html_name, f"/{formula}")
-        )
-        formulae_for_max_b_index.append(
-            (pi.terms[-1][1], pi.html_name, f"/{formula}")
-        )
+        formulae_for_min_b_index.append((pi.terms[0][1], pi.html_name, f"/{formula}"))
+        formulae_for_max_b_index.append((pi.terms[-1][1], pi.html_name, f"/{formula}"))
         if pi.name is not None:
             named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
         formulae.append(pi)
@@ -404,18 +400,12 @@ make_index_page(
 # Formulae by smallest b
 formulae_for_min_b_index.sort(key=lambda i: i[0])
 make_index_page(
-    [
-        (url, name)
-        for min_b, name, url in formulae_for_min_b_index
-    ],
+    [(url, name) for min_b, name, url in formulae_for_min_b_index],
     "min-b-smallest-first",
     "List of Machin-like formulae (by smallest arccotangent, low-to-high)",
 )
 make_index_page(
-    [
-        (url, name)
-        for min_b, name, url in formulae_for_min_b_index[::-1]
-    ],
+    [(url, name) for min_b, name, url in formulae_for_min_b_index[::-1]],
     "min-b-largest-first",
     "List of Machin-like formulae (by smallest arccotangent, high-to-low)",
 )
@@ -423,18 +413,12 @@ make_index_page(
 # Formulae by largest b
 formulae_for_max_b_index.sort(key=lambda i: i[0])
 make_index_page(
-    [
-        (url, name)
-        for max_b, name, url in formulae_for_max_b_index
-    ],
+    [(url, name) for max_b, name, url in formulae_for_max_b_index],
     "max-b-smallest-first",
     "List of Machin-like formulae (by largest arccotangent, low-to-high)",
 )
 make_index_page(
-    [
-        (url, name)
-        for max_b, name, url in formulae_for_max_b_index[::-1]
-    ],
+    [(url, name) for max_b, name, url in formulae_for_max_b_index[::-1]],
     "max-b-largest-first",
     "List of Machin-like formulae (by largest arccotangent, high-to-low)",
 )
