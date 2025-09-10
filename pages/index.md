@@ -16,7 +16,7 @@ You can:
   [high-to-low](/formulae/min-b-largest-first.html)
 * view the full list of Machin-like formulae sorted by largest \(b\):
   [low-to-high](/formulae/max-b-smallest-first.html),
-  [high-to-low](/formulae/max-b-largest-first.html),
+  [high-to-low](/formulae/max-b-largest-first.html)
 * view lists of Machin-like formulae with: {{ntermslinks}}
 * [view a random Machin-like formula](/random.html)
 * [download a CSV file containing all the formulae](csv.md)
