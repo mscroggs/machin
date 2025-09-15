@@ -1,7 +1,7 @@
+arctans>=0.2.1
 PyGithub
 pytz
 pytest
 pyyaml
-sympy
 website-build-tools
 git+https://github.com/mscroggs/arctans.git
