@@ -4,4 +4,3 @@ pytz
 pytest
 pyyaml
 website-build-tools
-git+https://github.com/mscroggs/arctans.git
