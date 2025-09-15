@@ -5,37 +5,19 @@ import os
 import re
 import typing
 
-import sympy  # type: ignore
-
 import yaml
+from arctans import Integer, Rational
+from arctans.numbers import RealNumber
 from machin import settings
 from webtools.markup import insert_links
 from webtools.citations import make_bibtex, markup_citation
 from webtools.tools import join
 
 
-def load_value(n: str) -> sympy.core.expr.Expr:
+def load_value(n: str) -> RealNumber:
     if "/" in n:
-        return sympy.Rational(*[int(i) for i in n.split("/")])
-    return sympy.Integer(n)
-
-
-def as_latex(n: sympy.core.expr.Expr) -> str:
-    if hasattr(n, "denominator"):
-        if n.denominator == 1:
-            return f"{n.numerator}"
-        if isinstance(n, sympy.Rational):
-            return f"\\frac{{{n.numerator}}}{{{n.denominator}}}"
-    return f"{n}"
-
-
-def as_compact(n: sympy.core.expr.Expr) -> str:
-    if hasattr(n, "denominator"):
-        if n.denominator == 1:
-            return f"{n.numerator}"
-        if isinstance(n, sympy.Rational):
-            return f"{n.numerator}/{n.denominator}"
-    return f"{n}"
+        return Rational(*[int(i) for i in n.split("/")])
+    return Integer(int(n))
 
 
 class Formula:
@@ -46,7 +28,7 @@ class Formula:
         code: str,
         name: typing.Optional[str],
         alt_names: typing.List[str],
-        terms: typing.List[typing.Tuple[sympy.core.expr.Expr, sympy.core.expr.Expr]],
+        terms: typing.List[typing.Tuple[RealNumber, RealNumber]],
         notes: typing.List[str],
         references: typing.List[typing.Dict[str, typing.Any] | str],
     ):
@@ -94,7 +76,7 @@ class Formula:
     def is_integer(self) -> bool:
         """Are all the arccotangents integers?"""
         for _, b in self.terms:
-            if not b.is_integer:
+            if b.denominator != 1:
                 return False
         return True
 
@@ -104,12 +86,12 @@ class Formula:
         out = ""
         for coeff, arctan in self.terms:
             if coeff < 0:
-                out += as_latex(coeff)
+                out += coeff.as_latex()
             else:
                 if out != "":
                     out += "+"
-                out += as_latex(coeff)
-            out += f"\\arctan\\left({as_latex(1 / arctan)}\\right)"
+                out += coeff.as_latex()
+            out += f"\\arctan\\left({(1 / arctan).as_latex()}\\right)"
         return out
 
     @property
@@ -127,12 +109,12 @@ class Formula:
             if coeff < 0:
                 if out != "":
                     out += " "
-                out += "- " + as_compact(-coeff)
+                out += f"- {-coeff}"
             else:
                 if out != "":
                     out += " + "
-                out += as_compact(coeff)
-            out += f"[{as_compact(arctan)}]"
+                out += f"{coeff}"
+            out += f"[{arctan}]"
         return out
 
     def notes(self, format: str = "HTML"):

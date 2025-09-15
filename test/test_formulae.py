@@ -11,7 +11,7 @@ ids = sorted([file[:-3] for file in os.listdir(formulae_path) if file.endswith("
 @pytest.mark.parametrize("id", ids)
 def test_is_pi(id):
     formula = load_formula(id)
-    pi = sum(c * math.atan(1 / a) for c, a in formula.terms)
+    pi = sum(float(c) * math.atan(1 / float(a)) for c, a in formula.terms)
     assert abs(pi - math.pi) < 1e-10
 
 

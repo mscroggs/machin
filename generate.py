@@ -1,8 +1,6 @@
 import math
-import sympy  # type: ignore
 import os
-from arctans import Arctan, Zero, generate
-from arctans.arctans import AbstractTerm
+from arctans import arctan, arccotan, generate
 from machin.formulae import load_formula
 from machin import settings
 
@@ -10,9 +8,9 @@ known_formulae = []
 
 for file in os.listdir(settings.formulae_path):
     if file.endswith(".pi"):
-        pi: AbstractTerm = Zero()
+        pi = arctan(0)
         for c, a in load_formula(file[:-3]).terms:
-            pi += Arctan(c, 1 / sympy.S(a))
+            pi += c * arccotan(a)
         known_formulae.append(pi)
 
 for formula in known_formulae:
@@ -25,7 +23,7 @@ pi_n = len(known_formulae)
 
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
-        for c, a in sorted(formula.terms, key=lambda ff: 1 / ff[1]):
-            f.write(f"{c}[{1 / a}]\n")
+        for coeff, arct in sorted(formula.terms, key=lambda ff: 1 / ff[1]):
+            f.write(f"{coeff}[{1 / arct}]\n")
     pi_n += 1
 print(f"Found {len(new_formulae)} new formulae for pi")
