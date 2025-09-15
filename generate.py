@@ -1,7 +1,6 @@
 import math
 import os
-from arctans import arctan, arccotan, generate, Rational
-from arctans.arctans import AbstractTerm
+from arctans import arctan, arccotan, generate
 from machin.formulae import load_formula
 from machin import settings
 
