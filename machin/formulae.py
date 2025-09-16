@@ -10,9 +10,15 @@ import yaml
 from arctans import Integer, Rational
 from arctans.numbers import RealNumber
 from machin import settings
-from webtools.markup import insert_links
+from webtools.markup import insert_links as _insert_links
 from webtools.citations import make_bibtex, markup_citation
 from webtools.tools import join
+
+
+def insert_links(txt: str) -> str:
+    """Insert links."""
+    txt = re.sub(r"\[(M[0-9]+)\]", r"[\1](/\1)", txt)
+    return _insert_links(txt)
 
 
 def load_value(n: str) -> RealNumber:

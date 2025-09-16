@@ -1,7 +1,17 @@
 --
+name: Takano's formula
 references:
-  - hcl1997
-  - "TAKANO (1982)(¢¢2.37598)"
+  - author:
+    - Takano, Kikuo
+    title: Pi no arctangent relation wo Motomete
+    journal: BIT
+    volume: 15
+    number: 4
+    year: 1983
+    pagestart: 83
+    pageend: 91
+notes:
+  - In 2022, this formula was used alongside [M000059] to compute 1,241,100,000,000 digits of &pi;
 --
 48[49]
 128[57]

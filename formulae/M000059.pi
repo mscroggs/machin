@@ -1,6 +1,8 @@
 --
 references:
   - stormer1896
+notes:
+  - In 2022, this formula was used alongside [M000213] to compute 1,241,100,000,000 digits of &pi;
 --
 176[57]
 28[239]
