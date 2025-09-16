@@ -4,6 +4,8 @@ alt-names:
   - Vega's formula
 references:
   - machin1706
+notes:
+  - This formula was used by Georg von Vega in 1789 to compute 126 decimal places of &pi;.
 --
 8[3]
 4[7]

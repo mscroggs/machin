@@ -1,6 +1,16 @@
 --
 references:
-  - "STRASSNITZKY (1844)"
+  - author:
+    - Dahse, Zacharias
+    title: Der Kreis-Umfang f&uuml;r den Durchmesser 1 auf 200 Decimalstellen berechnet
+    journal: Journal f&uuml;r die reine und angewandte Mathematik
+    volume: 27
+    year: 1844
+    pagestart: 198
+    pageend: 198
+name: Strassnitzky's formula
+notes:
+  - This formula was used by Zacharias Dahse in 1844 to compute 200 decimal places of &pi;.
 --
 4[2]
 4[5]
