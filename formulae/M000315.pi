@@ -1,6 +1,13 @@
 --
 references:
-  - "CASHMORE"
+  - author:
+    - Cashmore, M.
+    title: Letter in response to "S&eacute;rie la plus rapidement converfente pour le calcul du number &pi;" (Brogard, H.)
+    journal: L'interm&eacute;diaire des mathematicians
+    volume: 26
+    year: 1919
+    pagestart: 22
+    pageend: 22
 --
 256[80]
 -4[239]
