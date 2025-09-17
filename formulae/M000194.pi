@@ -1,6 +1,7 @@
 --
 references:
-  - "ASN (2007-8 - corrected 5Aug13)*1.86105 - 4-term identity)"
+  - id: machination
+    note: Found by Amrik Singh Nimbran in 2007-8.
 --
 64[21]
 12[239]

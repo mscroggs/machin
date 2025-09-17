@@ -1,6 +1,15 @@
 --
 references:
-  - "BENNETT (1925)"
+  - author:
+    - Bennett, A. A.
+    title: Two new arctangent relations for &pi;
+    journal: The American Mathematical Monthly
+    volume: 32
+    number: 5
+    year: 1925:
+    pagestart: 253
+    pageend: 255
+    doi: 10.2307/2299198
 --
 48[18]
 12[70]
