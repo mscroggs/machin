@@ -1,6 +1,14 @@
 --
 references:
-  - "SCHELLBACH (1832)"
+  - author:
+    - Schellbach, Karl
+    title: "&Uuml;ber den Ausdruck &pi; = (2/i)log(i)"
+    year: 1832
+    journal: Journal f&uuml;r die reine und angewandte Mathematik
+    volume: 9
+    pagestart: 404
+    pageend: 406
+    doi: 10.1515/crll.1832.9.404
 --
 12[7]
 8[8]
