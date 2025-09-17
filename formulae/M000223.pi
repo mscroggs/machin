@@ -1,6 +1,11 @@
 --
 references:
-  - "SIMSON (1723)"
+  - type: unpublished
+    author:
+    - Simson, Robert
+    title: Paper on series, enclosed in a letter to James Jurin
+    year: 1723
+    note: Printed in "Account of the life and writings of Robert Simson, M.D., late professor of mathematics in the University of Glasgow" (pages 105&ndash;111) by Trail, William, 1812.
 --
 32[10]
 -4[239]
