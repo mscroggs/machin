@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (27Aug03)"
+  - id: machination
+    note: Found by MRW on 27 August 2003.
 --
 366[109]
 -238[1023]
