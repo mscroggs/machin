@@ -1,7 +1,7 @@
 --
 references:
-  - hcl1997
-  - "MRW (09Jul95)"
+  - id: machination
+    note: Found by MRW on 9 July 1995.
 --
 332[107]
 68[4443]

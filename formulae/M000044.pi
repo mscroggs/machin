@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (06Dec94)(*1.55905, ¢¢1.98891, ¢¢2.33275)"
+  - id: machination
+    note: Found by MRW on 6 December 1994.
 --
 2324[1023]
 732[5593]

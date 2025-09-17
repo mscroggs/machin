@@ -1,7 +1,7 @@
 --
 references:
-  - hcl1997
-  - "MRW (06Dec94)(*1.56846, ¢¢1.97950)"
+  - id: machination
+    note: Found by MRW on 6 December 1994.
 --
 2324[1252]
 3056[5593]

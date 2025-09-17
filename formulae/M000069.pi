@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (***)"
+  - id: machination
+    note: Found by MRW.
 --
 2324[580]
 -1592[1710]
