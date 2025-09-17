@@ -1,6 +1,13 @@
 --
 references:
-  - "ESCOTT (1896)"
+  - author:
+    - Escott, E.-B.
+    title: Response to "Sur la foemule de Machin et les formules analogues" (Grav&eacute;, D.)
+    journal: L'interm&eacute;diaire des mathematicians
+    volume: 3
+    year: 1896
+    pagestart: 276
+    pageend: 276
 name: Escott's Identity
 --
 88[28]
