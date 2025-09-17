@@ -1,6 +1,7 @@
 --
 references:
-  - "HCL (13Jul01)(¢¢1.87533)"
+  - id: machination
+    note: Found by HCL on 13 July 2001.
 --
 40472[34208]
 91704[44179]
