@@ -4,14 +4,21 @@ import math
 import os
 import re
 import typing
+from warnings import warn
 
 import yaml
 from arctans import Integer, Rational
 from arctans.numbers import RealNumber
 from machin import settings
-from webtools.markup import insert_links
+from webtools.markup import insert_links as _insert_links
 from webtools.citations import make_bibtex, markup_citation
 from webtools.tools import join
+
+
+def insert_links(txt: str) -> str:
+    """Insert links."""
+    txt = re.sub(r"\[(M[0-9]+)\]", r"[\1](/\1)", txt)
+    return _insert_links(txt)
 
 
 def load_value(n: str) -> RealNumber:
@@ -42,9 +49,23 @@ class Formula:
         self._alt_names = alt_names
         self._references = []
         for r in references:
+            id = None
+            note = None
             if isinstance(r, str) and os.path.isfile(join(settings.references_path, r)):
-                with open(join(settings.references_path, r)) as f:
-                    self._references.append(yaml.safe_load(f))
+                id = r
+            if (
+                isinstance(r, dict)
+                and "id" in r
+                and os.path.isfile(join(settings.references_path, r["id"]))
+            ):
+                id = r["id"]
+                note = r.get("note")
+            if id is not None:
+                with open(join(settings.references_path, id)) as f:
+                    ref = yaml.safe_load(f)
+                    if note is not None:
+                        ref["note"] = note
+                    self._references.append(ref)
             else:
                 self._references.append(r)
 
@@ -131,6 +152,9 @@ class Formula:
         """Get references."""
         match format:
             case "HTML":
+                for r in self._references:
+                    if isinstance(r, str):
+                        warn(f"Incomplete reference: {r} (in {self.code})")
                 return "<br />".join(
                     f"<div class='citation'><code>{r}</code> (full reference coming soon)</div>"
                     if isinstance(r, str)

@@ -1,7 +1,8 @@
 --
 references:
   - hcl1997
-  - "HCL (28Sep93)(*1.89498)"
+  - id: machination
+    note: Found by HCL on 28 September 1993.
 --
 68[26]
 20[38]

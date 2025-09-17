@@ -1,6 +1,7 @@
 --
 references:
-  - "ASN (28Jul09)(*1.55630, *1.66383 - both 3-digit)"
+  - id: machination
+    note: Found by Amrik Singh Nimbran on 28 July 2009.
 --
 3740[1393]
 1288[3748]

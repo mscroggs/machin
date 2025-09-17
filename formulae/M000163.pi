@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (2Aug09)(*1.82119 - 4-term identity)"
+  - id: machination
+    note: Found by MRW on 2 August 2009.
 --
 64[21]
 28[239]

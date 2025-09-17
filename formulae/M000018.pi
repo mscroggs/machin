@@ -1,7 +1,8 @@
 --
 references:
   - hcl1997
-  - "HCL (20Sep94)(¢¢1.98891)"
+  - id: machination
+    note: Found by HCL on 20 September 1994.
 --
 732[239]
 128[1023]

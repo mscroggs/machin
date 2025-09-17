@@ -1,6 +1,7 @@
 --
 references:
-  - "HCL (21Jun03)(*1.53457)"
+  - id: machination
+    note: Found by HCL on 21 June 2003.
 --
 332[107]
 68[4443]

@@ -1,6 +1,7 @@
 --
 references:
-  - "ASN (2007-8)(*1.26579)"
+  - id: machination
+    note: Found by Amrik Singh Nimbran in 2007-8.
 --
 5380[1712]
 -88[103697]

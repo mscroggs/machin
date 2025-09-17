@@ -1,7 +1,7 @@
 --
 name: Euler's Machin-like formula
 references:
-  - "*MACHIN (1706)"
+  - machin1706
 --
 4[2]
 4[3]

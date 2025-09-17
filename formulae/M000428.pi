@@ -1,6 +1,12 @@
 --
 references:
-  - "CASTELLANOS (1988)"
+  - author:
+    - Castellanos, Dario
+    title: The ubuquitous &pi;
+    journal: Mathematics Magazine
+    volume: 61
+    year: 1988
+    doi: 10.1080/0025570X.1988.11977350
 --
 24[10]
 12[18]

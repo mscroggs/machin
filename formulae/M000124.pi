@@ -1,6 +1,7 @@
 --
 references:
-  - "HCL (***)"
+  - id: machination
+    note: Found by HCL.
 --
 183[57]
 -55[1023]

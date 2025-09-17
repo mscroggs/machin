@@ -1,6 +1,7 @@
 --
 references:
-  - "ASN (16Sep09)(*1.71075 - v. Arndt, 4-term & below)"
+  - id: machination
+    note: Found by Amrik Singh Nimbran on 16 September 2009.
 --
 68[23]
 32[182]

@@ -1,6 +1,8 @@
 --
 references:
-  - "STØRMER (1896)(¢¢2.30154, ¢¢2.37598, ¢¢2.38268)"
+  - stormer1896
+notes:
+  - In 2022, this formula was used alongside [M000213] to compute 1,241,100,000,000 decimal places of &pi;.
 --
 176[57]
 28[239]
