@@ -1,6 +1,7 @@
 """Settings."""
 
 import os as _os
+import yaml as _yaml
 
 from webtools import settings
 from webtools.tools import join as _join
@@ -12,6 +13,7 @@ pages_path = ""
 formulae_path = ""
 html_path = ""
 references_path = ""
+data_path = ""
 local_prefix: str | None = None
 
 github_token: str | None = None
@@ -38,6 +40,7 @@ def set_root_path(path: str):
     global formulae_path
     global html_path
     global references_path
+    global data_path
 
     root_path = path
     template_path = _join(root_path, "template")
@@ -45,12 +48,18 @@ def set_root_path(path: str):
     pages_path = _join(root_path, "pages")
     formulae_path = _join(root_path, "formulae")
     references_path = _join(root_path, "references")
+    data_path = _join(root_path, "data")
 
     settings.dir_path = root_path
     settings.template_path = template_path
     settings.str_extras = [
         ("{{tick}}", "<span style='color:#008800'>&#10004;</span>"),
     ]
+
+    with open(_join(data_path, "contributors")) as f:
+        settings.contributors = _yaml.load(f, Loader=_yaml.FullLoader)
+    with open(_join(data_path, "editors")) as f:
+        settings.editors = _yaml.load(f, Loader=_yaml.FullLoader)
 
     if html_path == "":
         html_path = _join(root_path, "_html")
