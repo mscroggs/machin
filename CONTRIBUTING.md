@@ -56,6 +56,10 @@ The tests can be run using:
 python3 -m pytest test/
 ```
 
+## Adding yourself to the contributors list
+Once you have contributed, you should add yourself to the [contributors page](https://machin-like.org/contributors.html).
+To do this, you should add info about yourself to the file [data/contributors](https://github.com/mscroggs/machin/blob/main/data/contributors).
+
 ## Code of conduct
 We expect all our contributors to follow our [code of conduct](CODE_OF_CONDUCT.md). Any unacceptable
 behaviour can be reported to Matthew (machin@mscroggs.co.uk).
