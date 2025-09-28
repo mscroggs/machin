@@ -11,6 +11,8 @@ references:
 name: Strassnitzky's formula
 notes:
   - This formula was used by Zacharias Dahse in 1844 to compute 200 decimal places of &pi;.
+discovered:
+  year: 1844
 --
 4[2]
 4[5]
