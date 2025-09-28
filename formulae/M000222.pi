@@ -2,6 +2,8 @@
 references:
   - "GAUSS (1863)(¢¢2.64766, ¢¢2.89392)"
 name: Gauss's identity
+discovered:
+  year: 1863
 --
 48[18]
 32[57]

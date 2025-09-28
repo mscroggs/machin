@@ -9,6 +9,8 @@ references:
     year: 1998
     publisher: Springer
     doi: 10.1007/978-3-642-56735-3
+discovered:
+  year: 1993
 notes:
   - "This formula was used in 2024 by [Matt Parker and a large group of volunteers](https://www.youtube.com/watch?v=LIg-6glbLkU) to compute 139 digits of &pi;."
 --
