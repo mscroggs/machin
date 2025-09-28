@@ -140,6 +140,13 @@ class Formula:
             out += f"[{arctan}]"
         return out
 
+    @property
+    def discovered_year(self) -> int | None:
+        """Year of discovery."""
+        if self._discovered is None:
+            return None
+        return self._discovered.get("year")
+
     def notes(self, format: str = "HTML"):
         """Get notes."""
         match format:
