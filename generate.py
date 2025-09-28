@@ -1,5 +1,6 @@
 import math
 import os
+from datetime import datetime
 from arctans import arctan, arccotan, generate
 from machin.formulae import load_formula
 from machin import settings
@@ -21,8 +22,15 @@ new_formulae = [formula for formula in new_formulae if 1 not in formula.term_dic
 
 pi_n = len(known_formulae)
 
+now = datetime.now()
+
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
+        f.write("--\n")
+        f.write(f"day: {now.day}\n")
+        f.write(f"month: {now.month}\n")
+        f.write(f"day: {now.year}\n")
+        f.write("--\n")
         for coeff, arct in sorted(formula.terms, key=lambda ff: 1 / ff[1]):
             f.write(f"{coeff}[{1 / arct}]\n")
     pi_n += 1
