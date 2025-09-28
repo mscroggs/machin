@@ -28,6 +28,7 @@ The entries in the metadata are:
 <tr><td>`alt&#8209;names`</td><td></td><td>Alternative names of the formula.</td></tr>
 <tr><td>`notes`</td><td></td><td>Notes about the formula.</td></tr>
 <tr><td>`references`</td><td></td><td>References to where the formula is defined.</td></tr>
+<tr><td>`discovered`</td><td></td><td></td>Date when the formula was discovered</td></tr>
 </table>
 
 ### Testing your contribution

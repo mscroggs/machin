@@ -38,6 +38,7 @@ class Formula:
         terms: typing.List[typing.Tuple[RealNumber, RealNumber]],
         notes: typing.List[str],
         references: typing.List[typing.Dict[str, typing.Any] | str],
+        discovered: typing.Dict[str, int] | None,
     ):
         """Create."""
         assert re.match(r"M[0-9]{6}", code)
@@ -48,6 +49,7 @@ class Formula:
         self._name = name
         self._alt_names = alt_names
         self._references = []
+        self._discovered = discovered
         for r in references:
             id = None
             note = None
@@ -193,9 +195,10 @@ def load_formula(code: str) -> Formula:
 
     return Formula(
         code,
-        data["name"] if "name" in data else None,
-        data["alt-names"] if "alt-names" in data else [],
+        data.get("name"),
+        data.get("alt-names", []),
         terms,
-        data["notes"] if "notes" in data else [],
-        data["references"] if "references" in data else [],
+        data.get("notes", []),
+        data.get("references", []),
+        data.get("discovered"),
     )
