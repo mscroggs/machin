@@ -455,12 +455,18 @@ links = []
 for y in years:
     links.append(("SECTION", f"{y}"))
     links += formulae_by_year[y]
-make_index_page(links, "by-year", "List of Machin-like formulae by year discovered (oldest first)")
+make_index_page(
+    links, "by-year", "List of Machin-like formulae by year discovered (oldest first)"
+)
 links = []
 for y in years[::-1]:
     links.append(("SECTION", f"{y}"))
     links += formulae_by_year[y]
-make_index_page(links, "by-year-reverse", "List of Machin-like formulae by year discovered (newest first)")
+make_index_page(
+    links,
+    "by-year-reverse",
+    "List of Machin-like formulae by year discovered (newest first)",
+)
 
 # Site map
 sitemap[html_local(join(settings.html_path, "sitemap.html"))] = "List of all pages"
