@@ -2,6 +2,10 @@
 references:
   - id: machination
     note: Found by MRW on 01 July 2010.
+discovered:
+  day: 1
+  month: 7
+  year: 2010
 --
 684[239]
 96[1511/2]

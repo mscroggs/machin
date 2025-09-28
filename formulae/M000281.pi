@@ -3,6 +3,10 @@ references:
   - hcl1997
   - id: machination
     note: Found by HCL on 28 September 1993.
+discovered:
+  day: 28
+  month: 9
+  year: 1993
 --
 68[26]
 20[38]
