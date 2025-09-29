@@ -2,6 +2,10 @@
 references:
   - id: machination
     note: Found by MRW.
+discovered:
+  day: 10
+  month: 8
+  year: 2006
 --
 508[192]
 516[1068]

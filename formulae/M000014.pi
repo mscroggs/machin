@@ -2,6 +2,10 @@
 references:
   - id: machination
     note: Found by Amrik Singh Nimbran on 11 June 2009.
+discovered:
+  day: 11
+  month: 6
+  year: 2009
 --
 5380[1710]
 332[5827]

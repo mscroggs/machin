@@ -2,6 +2,10 @@
 references:
   - id: machination
     note: Found by HCL on 16 June 2005.
+discovered:
+  day: 16
+  month: 6
+  year: 2005
 --
 -1385960[1770443]
 14515344[4218932]

@@ -2,6 +2,8 @@
 name: Euler's Machin-like formula
 references:
   - machin1706
+discovered:
+  year: 1706
 --
 4[2]
 4[3]

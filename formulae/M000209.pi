@@ -2,6 +2,10 @@
 references:
   - id: machination
     note: Found by MRW on 22 January 2004.
+discovered:
+  day: 22
+  month: 1
+  year: 2004
 --
 -102958034[213625056]
 576929997[497992127/2]

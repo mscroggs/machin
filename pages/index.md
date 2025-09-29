@@ -10,13 +10,19 @@ You can:
 * [view the full list of Machin-like formulae](/formulae)
 * [view the full list of Machin-like formulae with integer \(b\)s](/formulae/integer.html)
 * [view the list of named Machin-like formulae](/formulae/alpha.html)
-* [view the full list of Machin-like formulae sorted by Lehmer's measure](/formulae/lehmer.html)
-* view the full list of Machin-like formulae sorted by smallest \(b\):
+* view the full list of Machin-like formulae sorted by:
+<ul>
+* [Lehmer's measure](/formulae/lehmer.html)
+* year discovered:
+  [oldest first](/formulae/by-year.html),
+  [newest first](/formulae/by-year-reverse.html)
+* smallest \(b\):
   [low-to-high](/formulae/min-b-smallest-first.html),
   [high-to-low](/formulae/min-b-largest-first.html)
-* view the full list of Machin-like formulae sorted by largest \(b\):
+* largest \(b\):
   [low-to-high](/formulae/max-b-smallest-first.html),
   [high-to-low](/formulae/max-b-largest-first.html)
+</ul>
 * view lists of Machin-like formulae with: {{ntermslinks}}
 * [view a random Machin-like formula](/random.html)
 * [download a CSV file containing all the formulae](csv.md)

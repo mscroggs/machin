@@ -112,6 +112,7 @@ formulae_for_lehmer_index = []
 formulae_for_min_b_index = []
 formulae_for_max_b_index = []
 formulae_for_nterms_indices: dict[int, list[tuple[str, str, str]]] = {}
+formulae_by_year: dict[int, list[tuple[str, str]]] = {}
 named_formulae_for_index = []
 csv_rows = []
 
@@ -142,6 +143,11 @@ for file in os.listdir(settings.formulae_path):
         formulae_for_nterms_indices[len(pi.terms)].append(
             (pi.code, pi.html_name, f"/{formula}")
         )
+
+        if pi.discovered_year is not None:
+            if pi.discovered_year not in formulae_by_year:
+                formulae_by_year[pi.discovered_year] = []
+            formulae_by_year[pi.discovered_year].append((f"/{formula}", pi.html_name))
 
         if pi.name is None:
             content = heading("h1", f"{pi.code}")
@@ -310,18 +316,40 @@ def make_index_page(
             "</script>"
         )
     content += "<div id='pagelist'>"
-    content += "<ul>"
-    for url, name in formulae[:per_page]:
-        content += f"<li><a href='{url}'>{name}</a></li>"
-    content += "</ul>"
-    if len(formulae) > per_page:
+
+    pages = []
+    count = 0
+    pcontent = ""
+    last_title = ""
+    for url, name in formulae:
+        if url == "SECTION":
+            if pcontent != "":
+                pcontent += "</ul>"
+            pcontent += heading("h2", name) + "<ul>"
+            last_title = name
+        else:
+            if pcontent == "":
+                pcontent += heading("h2", f"{last_title} (continued)")
+                pcontent += "<ul>"
+            pcontent += f"<li><a href='{url}'>{name}</a></li>"
+            count += 1
+            if count == per_page:
+                pcontent += "</ul>"
+                pages.append(pcontent)
+                pcontent = ""
+                count = 0
+    if pcontent != "":
+        pcontent += "</ul>"
+        pages.append(pcontent)
+
+    content += pages[0]
+    if len(pages) > 0:
         content += (
             "<div class='nextlink'><a href='javascript:next_page()'>"
             f"Next {per_page} formulae &rarr;</a></div>"
         )
-    content += "</div>"
 
-    for i, start in enumerate(range(0, len(formulae), per_page)):
+    for i, pcontent in enumerate(pages):
         with open(
             join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w"
         ) as f:
@@ -330,11 +358,8 @@ def make_index_page(
                     "<div class='nextlink'><a href='javascript:prev_page()'>"
                     f"&larr; Previous {per_page} formulae</a></div>"
                 )
-            f.write("<ul>")
-            for url, name in formulae[start : start + per_page]:
-                f.write(f"<li><a href='{url}'>{name}</a></li>")
-            f.write("</ul>")
-            if len(formulae) > start + per_page:
+            f.write(pcontent)
+            if i + 1 < len(pages):
                 f.write(
                     "<div class='nextlink'><a href='javascript:next_page()'>"
                     f"Next {per_page} formulae &rarr;</a></div>"
@@ -421,6 +446,26 @@ make_index_page(
     [(url, name) for max_b, name, url in formulae_for_max_b_index[::-1]],
     "max-b-largest-first",
     "List of Machin-like formulae (by largest arccotangent, high-to-low)",
+)
+
+# Formulae by year
+years = list(formulae_by_year.keys())
+years.sort()
+links = []
+for y in years:
+    links.append(("SECTION", f"{y}"))
+    links += formulae_by_year[y]
+make_index_page(
+    links, "by-year", "List of Machin-like formulae by year discovered (oldest first)"
+)
+links = []
+for y in years[::-1]:
+    links.append(("SECTION", f"{y}"))
+    links += formulae_by_year[y]
+make_index_page(
+    links,
+    "by-year-reverse",
+    "List of Machin-like formulae by year discovered (newest first)",
 )
 
 # Site map
