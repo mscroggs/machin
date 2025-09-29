@@ -112,7 +112,7 @@ formulae_for_lehmer_index = []
 formulae_for_min_b_index = []
 formulae_for_max_b_index = []
 formulae_for_nterms_indices: dict[int, list[tuple[str, str, str]]] = {}
-formulae_by_year = {}
+formulae_by_year: dict[int, list[tuple[str, str]]] = {}
 named_formulae_for_index = []
 csv_rows = []
 
