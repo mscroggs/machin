@@ -1,4 +1,4 @@
-arctans>=0.2.1
+arctans>=0.2.2
 PyGithub
 pytz
 pytest
