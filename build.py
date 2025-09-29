@@ -344,7 +344,7 @@ def make_index_page(
         pages.append(pcontent)
 
     content += pages[0]
-    if len(pages) > 0:
+    if len(pages) > 1:
         content += (
             "<div class='nextlink'><a href='javascript:next_page()'>"
             f"Next {per_page} formulae &rarr;</a></div>"
