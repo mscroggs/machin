@@ -51,4 +51,4 @@ def test_notes_full_stop(id):
 def test_no_ones(id):
     formula = load_formula(id)
     for term in formula.terms:
-        assert id == "M000001" or term[1] != 1
+        assert int(id[1:]) == 0 or term[1] != 1
