@@ -329,7 +329,8 @@ def make_index_page(
             last_title = name
         else:
             if pcontent == "":
-                pcontent += heading("h2", f"{last_title} (continued)")
+                if last_title != "":
+                    pcontent += heading("h2", f"{last_title} (continued)")
                 pcontent += "<ul>"
             pcontent += f"<li><a href='{url}'>{name}</a></li>"
             count += 1
