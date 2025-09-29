@@ -45,3 +45,10 @@ def test_notes_full_stop(id):
     formula = load_formula(id)
     for note in formula._notes:
         assert note.endswith(".")
+
+
+@pytest.mark.parametrize("id", ids)
+def test_no_ones(id):
+    formula = load_formula(id)
+    for term in formula.terms:
+        assert int(id[1:]) == 0 or term[1] != 1
