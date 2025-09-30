@@ -1,6 +1,7 @@
 --
 references:
-  - "MATSUMOTO (2000)"
+  - id: machination
+    note: Found by Matsumoto in 2000.
 discovered:
   year: 2000
 --

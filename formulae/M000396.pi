@@ -1,6 +1,13 @@
 --
 references:
-  - "EULER (1738 or earlier - published 1744)"
+  - author: Euler, Leonhard
+    title: De variis modis circuli quadraturam numeris proxime exprimendi
+    year: 1744
+    journal: Commentarii academiae scientiarum Petropolitanae
+    volume: 9
+    pagestart: 222
+    pageend: 236
+    note: Written in 1738. Republished in <em>Opera omnia</em>, I.14, 245-259.
 discovered:
   year: 1738
 --
