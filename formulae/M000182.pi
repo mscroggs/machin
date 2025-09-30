@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (1975)(¢¢2.32533)"
+  - id: machination
+    note: Found by MRW in 1975.
 discovered:
   year: 1975
 --

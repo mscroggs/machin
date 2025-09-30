@@ -1,6 +1,7 @@
 --
 references:
-  - "KOEPP (1994)"
+  - id: machination
+    note: Found by Koepp in 1994.
 discovered:
   year: 1994
 --
