@@ -1,6 +1,7 @@
 --
 references:
-  - "EULER1779?)"
+  - id: machination
+    note: Found by Leonhard Euler in 1779.
 discovered:
   year: 1779
 --

@@ -1,6 +1,14 @@
 --
 references:
-  - "LEHMER (1938)(*2.24178)"
+  - author: Lehmer, D. H.
+    title: On Arccotangent Relations for &pi;
+    journal: The American Mathematical Monthly
+    volume: 45
+    issue: 10
+    year: 1938
+    pagestart: 657
+    pageend: 664
+    doi: 10.1080/00029890.1938.11990873
 discovered:
   year: 1938
 --
