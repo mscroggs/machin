@@ -1,6 +1,7 @@
 --
 references:
-  - "ESCOTT (1903)"
+  - id: machination
+    note: Found by E.-B. Escott in 1903.
 discovered:
   year: 1903
 --

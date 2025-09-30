@@ -1,6 +1,10 @@
 --
 references:
-  - "GAUSS (1863)(¢¢2.29361)"
+  - author: Gauss, Carl Friedrich
+    title: Werke volume 2
+    pagestart: 496
+    pageend: 502
+    year: 1863
 discovered:
   year: 1863
 --

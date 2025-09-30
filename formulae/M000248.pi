@@ -1,6 +1,7 @@
 --
 references:
-  - "MRW (1980)"
+  - id: machination
+    note: Found by MRW in 1980.
 discovered:
   year: 1980
 --
