@@ -117,95 +117,99 @@ named_formulae_for_index = []
 csv_rows = []
 
 # Make formula pages
-for file in os.listdir(settings.formulae_path):
-    if file.endswith(".pi"):
-        start = datetime.now()
-        formula = file[:-3]
-        print(f"{formula}.html", end="", flush=True)
-        pi = load_formula(formula)
-        rpath = join(settings.html_path, formula)
-        os.mkdir(rpath)
+formula_n = 0
+formula = "M000000"
+while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
+    start = datetime.now()
+    print(f"{formula}.html", end="", flush=True)
+    pi = load_formula(formula)
+    rpath = join(settings.html_path, formula)
+    os.mkdir(rpath)
 
-        formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
-        if pi.is_integer:
-            formulae_for_integer_index.append((pi.code, pi.html_name, f"/{formula}"))
-        formulae_for_lehmer_index.append(
-            (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
-        )
-        formulae_for_min_b_index.append((pi.terms[0][1], pi.html_name, f"/{formula}"))
-        formulae_for_max_b_index.append((pi.terms[-1][1], pi.html_name, f"/{formula}"))
-        if pi.name is not None:
-            named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
-        formulae.append(pi)
+    formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
+    if pi.is_integer:
+        formulae_for_integer_index.append((pi.code, pi.html_name, f"/{formula}"))
+    formulae_for_lehmer_index.append(
+        (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
+    )
+    formulae_for_min_b_index.append((pi.terms[0][1], pi.html_name, f"/{formula}"))
+    formulae_for_max_b_index.append((pi.terms[-1][1], pi.html_name, f"/{formula}"))
+    if pi.name is not None:
+        named_formulae_for_index.append((pi.code, pi.name, f"/{formula}"))
+    formulae.append(pi)
 
-        if len(pi.terms) not in formulae_for_nterms_indices:
-            formulae_for_nterms_indices[len(pi.terms)] = []
-        formulae_for_nterms_indices[len(pi.terms)].append(
-            (pi.code, pi.html_name, f"/{formula}")
-        )
+    if len(pi.terms) not in formulae_for_nterms_indices:
+        formulae_for_nterms_indices[len(pi.terms)] = []
+    formulae_for_nterms_indices[len(pi.terms)].append(
+        (pi.code, pi.html_name, f"/{formula}")
+    )
 
-        if pi.discovered_year is not None:
-            if pi.discovered_year not in formulae_by_year:
-                formulae_by_year[pi.discovered_year] = []
-            formulae_by_year[pi.discovered_year].append((f"/{formula}", pi.html_name))
+    if pi.discovered_year is not None:
+        if pi.discovered_year not in formulae_by_year:
+            formulae_by_year[pi.discovered_year] = []
+        formulae_by_year[pi.discovered_year].append((f"/{formula}", pi.html_name))
 
-        if pi.name is None:
-            content = heading("h1", f"{pi.code}")
+    if pi.name is None:
+        content = heading("h1", f"{pi.code}")
+    else:
+        content = heading("h1", f"{pi.code}: {pi.name}")
+
+    content += "<div style='overflow:scroll'>"
+    content += f"$$\\pi={pi.latex_formula}$$"
+    content += "</div>"
+
+    content += "<table class='formula'>"
+    if pi.name is not None:
+        if len(pi.alt_names) == 0:
+            content += row("Name", pi.name)
         else:
-            content = heading("h1", f"{pi.code}: {pi.name}")
-
-        content += "<div style='overflow:scroll'>"
-        content += f"$$\\pi={pi.latex_formula}$$"
-        content += "</div>"
-
-        content += "<table class='formula'>"
-        if pi.name is not None:
-            if len(pi.alt_names) == 0:
-                content += row("Name", pi.name)
-            else:
-                content += row("Names", ", ".join([pi.name] + pi.alt_names))
-        content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
+            content += row("Names", ", ".join([pi.name] + pi.alt_names))
+    content += row("Compact formula", f"<code>{pi.compact_formula}</code>")
+    content += row(
+        "Lehmer's measure",
+        "&infin;" if pi.lehmer_measure == "INFINITY" else f"{pi.lehmer_measure}"[:7],
+    )
+    content += row("Notes", pi.notes("HTML"))
+    bib = pi.references("BibTeX")
+    html = pi.references("HTML")
+    if html != "":
         content += row(
-            "Lehmer's measure",
-            "&infin;"
-            if pi.lehmer_measure == "INFINITY"
-            else f"{pi.lehmer_measure}"[:7],
+            "References",
+            html
+            if bib == ""
+            else (
+                f"{html}<br /><div class='citation'>"
+                f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
+            ),
         )
-        content += row("Notes", pi.notes("HTML"))
-        bib = pi.references("BibTeX")
-        html = pi.references("HTML")
-        if html != "":
-            content += row(
-                "References",
-                html
-                if bib == ""
-                else (
-                    f"{html}<br /><div class='citation'>"
-                    f"<a href='/{pi.code}/references.bib'>Download references as BibTe&Chi;</a></div>"
-                ),
-            )
-            with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
-                f.write(bib)
-        content += "</table>"
+        with open(join(settings.html_path, pi.code, "references.bib"), "w") as f:
+            f.write(bib)
+    content += "</table>"
 
-        csv_rows.append(
-            ",".join(
-                [
-                    pi.code,
-                    pi.compact_formula,
-                    "" if pi.name is None else pi.name,
-                    f"{pi.lehmer_measure}"[:7],
-                    f'"{pi.references("txt")}"',
-                    f'"{pi.notes("txt")}"',
-                ]
-            )
+    csv_rows.append(
+        ",".join(
+            [
+                pi.code,
+                pi.compact_formula,
+                "" if pi.name is None else pi.name,
+                f"{pi.lehmer_measure}"[:7],
+                f'"{pi.references("txt")}"',
+                f'"{pi.notes("txt")}"',
+            ]
         )
+    )
 
-        write_html_page(
-            join(rpath, "index.html"), f"{formula}: {pi.text_name}", content
-        )
-        end = datetime.now()
-        print(f" (completed in {(end - start).total_seconds():.2f}s)")
+    write_html_page(
+        join(rpath, "index.html"),
+        f"{formula}: {pi.text_name}",
+        content,
+        include_in_sitemap=False,
+    )
+    end = datetime.now()
+    print(f" (completed in {(end - start).total_seconds():.2f}s)")
+
+    formula_n += 1
+    formula = "M" + f"000000{formula_n}"[-6:]
 
 csv_rows.sort()
 with open(join(settings.html_path, "formulae.csv"), "w") as f:
@@ -276,6 +280,7 @@ def make_index_page(
     title: str,
     per_page: int = 50,
 ):
+    print(pagename, end="", flush=True)
     content = heading("h1", title)
     if len(formulae) > per_page:
         content += (
@@ -369,6 +374,7 @@ def make_index_page(
     write_html_page(
         join(settings.html_path, "formulae", f"{pagename}.html"), title, content
     )
+    print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
 
 # Alphabetical
@@ -505,9 +511,11 @@ def list_pages(folder: str) -> str:
     return out
 
 
+print("sitemap.html", end="", flush=True)
 content = heading("h1", "List of all pages") + list_pages("")
 with open(join(settings.html_path, "sitemap.html"), "w") as f:
     f.write(make_html_page(content))
+print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
 end_all = datetime.now()
 print(f"Total time: {(end_all - start_all).total_seconds():.2f}s")

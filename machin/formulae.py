@@ -4,7 +4,6 @@ import math
 import os
 import re
 import typing
-from warnings import warn
 
 import yaml
 from arctans import Integer, Rational
@@ -163,7 +162,7 @@ class Formula:
             case "HTML":
                 for r in self._references:
                     if isinstance(r, str):
-                        warn(f"Incomplete reference: {r} (in {self.code})")
+                        raise ValueError(f"Incomplete reference: {r} (in {self.code})")
                 return "<br />".join(
                     f"<div class='citation'><code>{r}</code> (full reference coming soon)</div>"
                     if isinstance(r, str)
