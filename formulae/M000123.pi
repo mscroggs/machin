@@ -1,6 +1,7 @@
 --
 references:
-  - "HCL (2003)"
+  - id: machination
+    note: Found by HCL in 2003.
 discovered:
   year: 2003
 --

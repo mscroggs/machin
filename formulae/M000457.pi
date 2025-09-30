@@ -1,7 +1,11 @@
 --
 name: Hermann's formula
 references:
-  - "HERMANN (1706)(¢¢6.60113)"
+  - type: unpublished
+    author: Hermann, Jakob
+    title: Letter to Gottfried Leibniz
+    year: 1706
+    note: Published in 1849 in <em>Leibnizens mathematische schriften</em>, pages 302-304.
 discovered:
   year: 1706
 --
