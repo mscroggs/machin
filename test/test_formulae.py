@@ -1,11 +1,12 @@
 import math
 import os
 import pytest
+import yaml
+from machin import settings
 from machin.formulae import load_formula
 from webtools.tools import join
 
-formulae_path = join(os.path.dirname(os.path.realpath(__file__)), "..", "formulae")
-ids = sorted([file[:-3] for file in os.listdir(formulae_path) if file.endswith(".pi")])
+ids = sorted([file[:-3] for file in os.listdir(settings.formulae_path) if file.endswith(".pi")])
 
 
 @pytest.mark.parametrize("id", ids)
@@ -52,3 +53,30 @@ def test_no_ones(id):
     formula = load_formula(id)
     for term in formula.terms:
         assert int(id[1:]) == 0 or term[1] != 1
+
+
+@pytest.mark.parametrize("id", ids)
+def test_metadata(id):
+    with open(join(settings.root_path, "template.pi")) as f:
+        template = yaml.safe_load(f)
+    print(template)
+    with open(join(settings.formulae_path, f"{id}.pi")) as f:
+        content = f.read().split("--")
+    assert len(content) in [1, 3]
+    if len(content) == 1:
+        return
+    metadata = content[1]
+    data = yaml.safe_load(metadata)
+
+    def all_in(a, b):
+        if b is None:
+            return True
+        for i in a:
+            if i not in b:
+                return False
+            if isinstance(a[i], dict) and not all_in(a[i], b[i]):
+                return False
+        return True
+
+    print(data)
+    assert all_in(data, template)

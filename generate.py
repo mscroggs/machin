@@ -29,9 +29,10 @@ now = datetime.now()
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
         f.write("--\n")
-        f.write(f"day: {now.day}\n")
-        f.write(f"month: {now.month}\n")
-        f.write(f"day: {now.year}\n")
+        f.write(f"discovered:\n")
+        f.write(f"  day: {now.day}\n")
+        f.write(f"  month: {now.month}\n")
+        f.write(f"  year: {now.year}\n")
         f.write("--\n")
         for coeff, arct in sorted(formula.terms, key=lambda ff: 1 / ff[1]):
             f.write(f"{coeff}[{1 / arct}]\n")
