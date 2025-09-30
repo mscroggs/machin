@@ -29,7 +29,7 @@ now = datetime.now()
 for formula in new_formulae:
     with open(os.path.join("formulae", "M" + f"000000{pi_n}"[-6:] + ".pi"), "w") as f:
         f.write("--\n")
-        f.write(f"discovered:\n")
+        f.write("discovered:\n")
         f.write(f"  day: {now.day}\n")
         f.write(f"  month: {now.month}\n")
         f.write(f"  year: {now.year}\n")
