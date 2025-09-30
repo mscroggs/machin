@@ -7,6 +7,8 @@ from machin.formulae import load_formula
 from webtools.tools import join
 
 ids = sorted([file[:-3] for file in os.listdir(settings.formulae_path) if file.endswith(".pi")])
+with open(join(settings.root_path, "template.pi")) as f:
+    template = yaml.safe_load(f)
 
 
 @pytest.mark.parametrize("id", ids)
@@ -57,9 +59,6 @@ def test_no_ones(id):
 
 @pytest.mark.parametrize("id", ids)
 def test_metadata(id):
-    with open(join(settings.root_path, "template.pi")) as f:
-        template = yaml.safe_load(f)
-    print(template)
     with open(join(settings.formulae_path, f"{id}.pi")) as f:
         content = f.read().split("--")
     assert len(content) in [1, 3]
@@ -78,5 +77,4 @@ def test_metadata(id):
                 return False
         return True
 
-    print(data)
     assert all_in(data, template)
