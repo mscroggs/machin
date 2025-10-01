@@ -5,12 +5,26 @@ import yaml
 from machin import settings
 from machin.formulae import load_formula
 from webtools.tools import join
+import webtools
+
+
+def insert_webtools_template(d):
+    out = {}
+    for i, j in d.items():
+        if isinstance(j, dict):
+            out[i] = insert_webtools_template(j)
+        elif j == "webtools.citations.template":
+            out[i] = webtools.citations.template
+        else:
+            out[i] = j
+    return out
+
 
 ids = sorted(
     [file[:-3] for file in os.listdir(settings.formulae_path) if file.endswith(".pi")]
 )
 with open(join(settings.root_path, "template.pi")) as f:
-    template = yaml.safe_load(f)
+    template = insert_webtools_template(yaml.safe_load(f))
 
 
 @pytest.mark.parametrize("id", ids)
@@ -73,12 +87,19 @@ def test_metadata(id):
 
     def all_in(a, b):
         if b is None:
-            return True
+            return False
         for i in a:
             if i not in b:
                 return False
-            if isinstance(a[i], dict) and not all_in(a[i], b[i]):
-                return False
+            if isinstance(a[i], dict):
+                if not all_in(a[i], b[i]):
+                    return False
+            elif isinstance(a[i], list):
+                for j in a[i]:
+                    if isinstance(j, dict) and not all_in(j, b[i]):
+                        return False
+            else:
+                assert isinstance(a[i], (str, int))
         return True
 
     assert all_in(data, template)

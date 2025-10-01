@@ -2,16 +2,7 @@ name:
 alt-names:
 notes:
 references:
-  type:
-  author:
-  title:
-  volume:
-  issue:
-  pagestart:
-  pageend:
-  booktitle:
-  howpublished:
-  note:
+  webtools.citations.template
 discovered:
   year:
   month:
