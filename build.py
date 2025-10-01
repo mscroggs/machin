@@ -8,7 +8,7 @@ from datetime import datetime
 
 from machin import settings
 from machin.formulae import load_formula
-from webtools.html import make_html_page
+from webtools.html import make_html_page, make_html_forwarding_page
 from webtools.markup import heading, markup
 from webtools.tools import html_local, join, parse_metadata
 
@@ -118,7 +118,7 @@ csv_rows = []
 
 # Make formula pages
 formula_n = 0
-formula = "M000000"
+formula = "M" + "0" * settings.code_digits
 while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
     start = datetime.now()
     print(f"{formula}.html", end="", flush=True)
@@ -208,8 +208,15 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
     end = datetime.now()
     print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
+    for c in settings.code_legacy_digits:
+        if len(f"{formula_n}") < c:
+            lformula = "M" + ("0" * c + f"{formula_n}")[-c:]
+            lrpath = join(settings.html_path, lformula)
+            os.mkdir(lrpath)
+            make_html_forwarding_page(join(lrpath, "index.html"))
+
     formula_n += 1
-    formula = "M" + f"000000{formula_n}"[-6:]
+    formula = "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits:]
 
 csv_rows.sort()
 with open(join(settings.html_path, "formulae.csv"), "w") as f:

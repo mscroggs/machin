@@ -91,3 +91,6 @@ if _os.path.isfile(
     _join(_os.path.dirname(_os.path.realpath(__file__)), "..", "README.md")
 ):
     set_root_path(_join(_os.path.dirname(_os.path.realpath(__file__)), ".."))
+
+code_digits = 9
+code_legacy_digits = [6]
