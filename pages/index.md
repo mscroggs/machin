@@ -1,4 +1,4 @@
-[Machin's formula (M000001)](/M000001) is a formula for &pi; that was discovered by John Machin in 1706:
+[Machin's formula (M000000001)](/M000000001) is a formula for &pi; that was discovered by John Machin in 1706:
 $$\pi=16\arctan\left(\frac15\right)-4\arctan\left(\frac1{239}\right)$$
 There are a huge number of Machin-like formulae that have since been discovered, all of which
 are of the form:
