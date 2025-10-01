@@ -42,7 +42,9 @@ def test_no_repeats():
 
 def test_no_gaps():
     for i, _ in enumerate(ids):
-        assert "M" + ("0" * settings.code_digits + f"{i}")[-settings.code_digits:] in ids
+        assert (
+            "M" + ("0" * settings.code_digits + f"{i}")[-settings.code_digits :] in ids
+        )
 
 
 @pytest.mark.parametrize("id", ids)
