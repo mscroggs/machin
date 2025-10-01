@@ -52,9 +52,6 @@ def set_root_path(path: str):
 
     settings.dir_path = root_path
     settings.template_path = template_path
-    settings.str_extras = [
-        ("{{tick}}", "<span style='color:#008800'>&#10004;</span>"),
-    ]
 
     with open(_join(data_path, "contributors")) as f:
         settings.contributors = _yaml.load(f, Loader=_yaml.FullLoader)
@@ -94,3 +91,8 @@ if _os.path.isfile(
 
 code_digits = 9
 code_legacy_digits = [6]
+
+settings.str_extras = [
+    ("{{tick}}", "<span style='color:#008800'>&#10004;</span>"),
+    ("{{code-digits}}", f"{code_digits}"),
+]
