@@ -4,6 +4,6 @@ notes:
 references:
   webtools.citations.template
 discovered:
-  year:
+  year: REQUIRED
   month:
   day:
