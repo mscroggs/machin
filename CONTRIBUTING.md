@@ -16,7 +16,7 @@ If you want to contribute, but are unsure where to start, have a look at the
 
 ### Defining an formula
 Formulae on machin-like.org are defined using files in the `formulae/` folder with the `.pi` extension.
-This file begins with metadata (im yaml format) between two lines containing only `--`, then has the terms of
+This file begins with metadata (in yaml format) between two lines containing only `--`, then has the terms of
 the formula (in [compact notation](machin-like.md#Compact-notation)) on the following lines.
 The entries in the metadata are:
 
@@ -28,7 +28,7 @@ The entries in the metadata are:
 <tr><td>`alt&#8209;names`</td><td></td><td>Alternative names of the formula.</td></tr>
 <tr><td>`notes`</td><td></td><td>Notes about the formula.</td></tr>
 <tr><td>`references`</td><td></td><td>References to where the formula is defined.</td></tr>
-<tr><td>`discovered`</td><td></td><td></td>Date when the formula was discovered</td></tr>
+<tr><td>`discovered`</td><td></td><td>Date when the formula was discovered</td></tr>
 </table>
 
 ### Testing your contribution
