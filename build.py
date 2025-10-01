@@ -213,10 +213,13 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
             lformula = "M" + ("0" * c + f"{formula_n}")[-c:]
             lrpath = join(settings.html_path, lformula)
             os.mkdir(lrpath)
-            make_html_forwarding_page(join(lrpath, "index.html"))
+            with open(join(lrpath, "index.html"), "w") as f:
+                f.write(make_html_forwarding_page(f"/{formula}"))
 
     formula_n += 1
-    formula = "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits:]
+    formula = (
+        "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits :]
+    )
 
 csv_rows.sort()
 with open(join(settings.html_path, "formulae.csv"), "w") as f:
