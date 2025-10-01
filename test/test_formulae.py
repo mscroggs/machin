@@ -15,6 +15,7 @@ def insert_webtools_template(d):
             out[i] = insert_webtools_template(j)
         elif j == "webtools.citations.template":
             out[i] = webtools.citations.template
+            out[i]["id"] = None
         else:
             out[i] = j
     return out
@@ -86,8 +87,7 @@ def test_metadata(id):
     data = yaml.safe_load(metadata)
 
     def all_in(a, b):
-        if b is None:
-            return False
+        assert isinstance(b, dict)
         for i in a:
             if i not in b:
                 return False
@@ -100,6 +100,10 @@ def test_metadata(id):
                         return False
             else:
                 assert isinstance(a[i], (str, int))
+        for i, j in b.items():
+            if j == "REQUIRED" and i not in a:
+                if set(a.keys()) != {"id", "note"}:
+                    return False
         return True
 
     assert all_in(data, template)
