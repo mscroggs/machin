@@ -1,0 +1,20 @@
+--
+references:
+  - author: Euler, Leonhard
+    title: Investigatio quarundam serierum, quae ad rationem peripheriae circuli ad diametrum vero proxime definiendam maxime sunt accommodatae
+    year: 1798
+    journal: Nova acta academiae scientiarum Petropolitinae
+    volume: 11
+    pagestart: 133
+    pageend: 149
+    note: Presented in 1779. Republished in <em>Opera omnia</em>, I.16, 1-20.
+  - type: book
+    author: Vega, Jurij
+    title: Thesaurus Logarithmorum Completus
+    year: 1794
+    note: Formula used on page 633.
+discovered:
+  year: 1779
+--
+20[7]
+8[79/3]
