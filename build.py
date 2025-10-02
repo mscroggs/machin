@@ -192,7 +192,9 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
                 pi.code,
                 pi.compact_formula,
                 "" if pi.name is None else pi.name,
-                f"{pi.lehmer_measure}"[:7],
+                "INFINITY"
+                if pi.lehmer_measure == "INFINITY"
+                else f"{pi.lehmer_measure}"[:7],
                 f'"{pi.references("txt")}"',
                 f'"{pi.notes("txt")}"',
             ]
