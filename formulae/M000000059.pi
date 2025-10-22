@@ -2,7 +2,7 @@
 references:
   - stormer1896
 notes:
-  - In 2022, this formula was used alongside [M000213] to compute 1,241,100,000,000 decimal places of &pi;.
+  - In 2002, this formula was used alongside [M000213] to compute 1,241,100,000,000 decimal places of &pi;.
 discovered:
   year: 1896
 --
