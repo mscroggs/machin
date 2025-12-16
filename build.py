@@ -8,7 +8,7 @@ from datetime import datetime
 
 from machin import settings
 from machin.formulae import load_formula
-from webtools.html import make_html_page, make_html_forwarding_page
+from webtools.html import make_html_page
 from webtools.markup import heading, markup
 from webtools.tools import html_local, join, parse_metadata
 
