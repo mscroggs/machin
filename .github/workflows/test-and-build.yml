@@ -45,8 +45,8 @@ jobs:
       - run: python3 -m pip install pytest-xdist
         name: Install dependencies
 
-      - run: python3 -m pip install -r requirements.txt
-        name: Install requirements
+      - run: python3 -m pip install .
+        name: Install
 
       - run: python3 -m pytest -n4 test
         name: Run tests with pytest
