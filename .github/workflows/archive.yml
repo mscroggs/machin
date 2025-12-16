@@ -41,18 +41,24 @@ jobs:
           python-version: "3.14"
       - uses: actions/checkout@v4
 
-      - name: Move verification jsons
+      - name: Clone arctans
+        uses: actions/checkout@v4
+        with:
+          path: ./arctans
+          repository: mscroggs/arctans
+      - name: Install arctans
         run: |
-          mv verification/*.json .
-          rm -r verification
+          cd arctans
+          python3 -m pip install .
 
       - run: python3 -m pip install .
-      - run: python3 build.py _html --verification-json verification.json --github-token ${{ secrets.GITHUB_TOKEN }} --processes 4
+      - run: python3 build.py _html --github-token ${{ secrets.GITHUB_TOKEN }}
         name: Build website HTML
 
       - name: Remove __pycache__
         run: |
           rm -r machin/__pycache__
+          rm -r arctans/arctans/__pycache__
 
       - name: Make lock file
         run: pip freeze > requirements.lock
