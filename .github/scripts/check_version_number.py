@@ -22,7 +22,7 @@ with open(
 
 _, access_key = sys.argv
 
-git = github.Github(access_key)
+git = github.Github(auth=github.Auth.Token(access_key))
 
 machin = git.get_repo("mscroggs/machin")
 

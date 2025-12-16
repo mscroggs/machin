@@ -5,7 +5,7 @@ import github
 
 _, tar_gz, version, access_key = sys.argv
 
-git = github.Github(access_key)
+git = github.Github(auth=github.Auth.Token(access_key))
 
 machin = git.get_repo("mscroggs/machin")
 branch = machin.get_branch("main")
