@@ -63,7 +63,14 @@ jobs:
         run: pip freeze > requirements.lock
 
       - name: Make tar.gz
-        run: tar --exclude '.git' -czvf ../machin-like-v${{ needs.check-version-number.outputs.release }}.tar.gz .
+        run: |
+          tar \
+          --exclude '.git' \
+          --exclude 'arctans/.git' \
+          --exclude 'arctans/arctans.egg-info' \
+          --exclude 'arctans/build' \
+          --exclude 'machin/__pycache__' \
+          -czvf ../machin-like-v${{ needs.check-version-number.outputs.release }}.tar.gz .
 
       - name: Install PyGitHub
         run: python3 -m pip install PyGitHub
