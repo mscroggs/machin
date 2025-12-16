@@ -9,3 +9,8 @@ website [machin-like.org](https://machin-like.org) that includes information abo
 formulae.
 
 Information about how to contribute to machin-like.org can be found in the [contributing notes](CONTRIBUTING.md).
+
+## Archive
+Archived shapshots machin-like.org and the code used to generate it (including the
+library [arctans](https://github.com/mscroggs/arctans)) can be found at
+https://dx.doi.org/10.5281/zenodo.17954249
