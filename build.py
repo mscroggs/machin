@@ -8,7 +8,7 @@ from datetime import datetime
 
 from machin import settings
 from machin.formulae import load_formula
-from webtools.html import make_html_page, make_html_forwarding_page
+from webtools.html import make_html_page
 from webtools.markup import heading, markup
 from webtools.tools import html_local, join, parse_metadata
 
@@ -23,6 +23,7 @@ settings.settings.str_extras.append(
         str(sum(1 for file in os.listdir(settings.formulae_path) if file.endswith(".pi"))),
     )
 )
+settings.settings.str_extras.append(("{{code-digits}}", f"{settings.code_digits}"))
 
 parser = argparse.ArgumentParser(description="Build website")
 parser.add_argument(
@@ -197,14 +198,6 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
     )
     end = datetime.now()
     print(f" (completed in {(end - start).total_seconds():.2f}s)")
-
-    for c in settings.code_legacy_digits:
-        if len(f"{formula_n}") < c:
-            lformula = "M" + ("0" * c + f"{formula_n}")[-c:]
-            lrpath = join(settings.html_path, lformula)
-            os.mkdir(lrpath)
-            with open(join(lrpath, "index.html"), "w") as f:
-                f.write(make_html_forwarding_page(f"/{formula}"))
 
     formula_n += 1
     formula = "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits :]
