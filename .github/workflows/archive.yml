@@ -58,7 +58,6 @@ jobs:
       - name: Remove __pycache__
         run: |
           rm -r machin/__pycache__
-          rm -r arctans/arctans/__pycache__
 
       - name: Make lock file
         run: pip freeze > requirements.lock
