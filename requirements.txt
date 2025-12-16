@@ -1,6 +1,0 @@
-arctans>=0.2.2
-website-build-tools>=0.1.8
-PyGithub
-pytz
-pytest
-pyyaml
