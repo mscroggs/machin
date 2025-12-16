@@ -6,11 +6,7 @@ from webtools.tools import join
 from webtools.citations import template
 
 ids = sorted(
-    list(
-        file
-        for file in os.listdir(settings.references_path)
-        if not file.startswith(".")
-    )
+    list(file for file in os.listdir(settings.references_path) if not file.startswith("."))
 )
 
 
