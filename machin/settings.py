@@ -84,9 +84,7 @@ def set_local_prefix(prefix: str):
     settings.local_prefix = prefix
 
 
-if _os.path.isfile(
-    _join(_os.path.dirname(_os.path.realpath(__file__)), "..", "README.md")
-):
+if _os.path.isfile(_join(_os.path.dirname(_os.path.realpath(__file__)), "..", "README.md")):
     set_root_path(_join(_os.path.dirname(_os.path.realpath(__file__)), ".."))
 
 code_digits = 9

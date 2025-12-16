@@ -20,11 +20,7 @@ settings.settings.str_extras.append(("{{csv-first-line}}", csv_first_line))
 settings.settings.str_extras.append(
     (
         "{{machin-count}}",
-        str(
-            sum(
-                1 for file in os.listdir(settings.formulae_path) if file.endswith(".pi")
-            )
-        ),
+        str(sum(1 for file in os.listdir(settings.formulae_path) if file.endswith(".pi"))),
     )
 )
 
@@ -52,9 +48,7 @@ parser.add_argument(
 sitemap = {}
 
 
-def write_html_page(
-    path: str, title: str, content: str, include_in_sitemap: bool = True
-):
+def write_html_page(path: str, title: str, content: str, include_in_sitemap: bool = True):
     """Write a HTML page.
 
     Args:
@@ -129,9 +123,7 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
     formulae_for_index.append((pi.code, pi.html_name, f"/{formula}"))
     if pi.is_integer:
         formulae_for_integer_index.append((pi.code, pi.html_name, f"/{formula}"))
-    formulae_for_lehmer_index.append(
-        (pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}")
-    )
+    formulae_for_lehmer_index.append((pi.lehmer_measure, pi.code, pi.html_name, f"/{formula}"))
     formulae_for_min_b_index.append((pi.terms[0][1], pi.html_name, f"/{formula}"))
     formulae_for_max_b_index.append((pi.terms[-1][1], pi.html_name, f"/{formula}"))
     if pi.name is not None:
@@ -140,9 +132,7 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
 
     if len(pi.terms) not in formulae_for_nterms_indices:
         formulae_for_nterms_indices[len(pi.terms)] = []
-    formulae_for_nterms_indices[len(pi.terms)].append(
-        (pi.code, pi.html_name, f"/{formula}")
-    )
+    formulae_for_nterms_indices[len(pi.terms)].append((pi.code, pi.html_name, f"/{formula}"))
 
     if pi.discovered_year is not None:
         if pi.discovered_year not in formulae_by_year:
@@ -192,9 +182,7 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
                 pi.code,
                 pi.compact_formula,
                 "" if pi.name is None else pi.name,
-                "INFINITY"
-                if pi.lehmer_measure == "INFINITY"
-                else f"{pi.lehmer_measure}"[:7],
+                "INFINITY" if pi.lehmer_measure == "INFINITY" else f"{pi.lehmer_measure}"[:7],
                 f'"{pi.references("txt")}"',
                 f'"{pi.notes("txt")}"',
             ]
@@ -219,9 +207,7 @@ while os.path.isfile(join(settings.formulae_path, f"{formula}.pi")):
                 f.write(make_html_forwarding_page(f"/{formula}"))
 
     formula_n += 1
-    formula = (
-        "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits :]
-    )
+    formula = "M" + ("0" * settings.code_digits + f"{formula_n}")[-settings.code_digits :]
 
 csv_rows.sort()
 with open(join(settings.html_path, "formulae.csv"), "w") as f:
@@ -368,9 +354,7 @@ def make_index_page(
         )
 
     for i, pcontent in enumerate(pages):
-        with open(
-            join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w"
-        ) as f:
+        with open(join(settings.html_path, "formulae", f"{pagename}-{i}.html"), "w") as f:
             if i > 0:
                 f.write(
                     "<div class='nextlink'><a href='javascript:prev_page()'>"
@@ -383,9 +367,7 @@ def make_index_page(
                     f"Next {per_page} formulae &rarr;</a></div>"
                 )
 
-    write_html_page(
-        join(settings.html_path, "formulae", f"{pagename}.html"), title, content
-    )
+    write_html_page(join(settings.html_path, "formulae", f"{pagename}.html"), title, content)
     print(f" (completed in {(end - start).total_seconds():.2f}s)")
 
 
@@ -409,10 +391,7 @@ make_index_page(
 for n in sorted(list(formulae_for_nterms_indices.keys())):
     formulae_for_nterms_indices[n].sort(key=lambda i: i[0].lower())
     make_index_page(
-        [
-            (url, f"{code}: {name}")
-            for code, name, url in formulae_for_nterms_indices[n]
-        ],
+        [(url, f"{code}: {name}") for code, name, url in formulae_for_nterms_indices[n]],
         f"{n}-terms",
         f"List of Machin-like formulae with {n} term{'' if n == 1 else 's'}",
     )
@@ -426,12 +405,8 @@ make_index_page(
 )
 
 # Formulae by Lehmer measure
-largest_lehmer = max(
-    i[0] for i in formulae_for_lehmer_index if not isinstance(i[0], str)
-)
-formulae_for_lehmer_index.sort(
-    key=lambda i: largest_lehmer * 2 if i[0] == "INFINITY" else i[0]
-)
+largest_lehmer = max(i[0] for i in formulae_for_lehmer_index if not isinstance(i[0], str))
+formulae_for_lehmer_index.sort(key=lambda i: largest_lehmer * 2 if i[0] == "INFINITY" else i[0])
 make_index_page(
     [
         (url, f"{code}: {name} ({str(measure)[:7]})")
@@ -474,9 +449,7 @@ links = []
 for y in years:
     links.append(("SECTION", f"{y}"))
     links += formulae_by_year[y]
-make_index_page(
-    links, "by-year", "List of Machin-like formulae by year discovered (oldest first)"
-)
+make_index_page(links, "by-year", "List of Machin-like formulae by year discovered (oldest first)")
 links = []
 for y in years[::-1]:
     links.append(("SECTION", f"{y}"))

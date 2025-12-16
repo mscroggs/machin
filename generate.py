@@ -17,9 +17,7 @@ for file in os.listdir(settings.formulae_path):
 for formula in known_formulae:
     assert (math.pi - float(formula)) < 0.0001
 
-new_formulae = generate(
-    known_formulae, max_terms=8, max_coefficient_denominator=1, printing=True
-)
+new_formulae = generate(known_formulae, max_terms=8, max_coefficient_denominator=1, printing=True)
 new_formulae = [formula for formula in new_formulae if one not in formula.term_dict]
 
 pi_n = len(known_formulae)

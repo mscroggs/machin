@@ -21,9 +21,7 @@ def insert_webtools_template(d):
     return out
 
 
-ids = sorted(
-    [file[:-3] for file in os.listdir(settings.formulae_path) if file.endswith(".pi")]
-)
+ids = sorted([file[:-3] for file in os.listdir(settings.formulae_path) if file.endswith(".pi")])
 with open(join(settings.root_path, "template.pi")) as f:
     template = insert_webtools_template(yaml.safe_load(f))
 
@@ -57,9 +55,7 @@ def test_no_repeats():
 
 def test_no_gaps():
     for i, _ in enumerate(ids):
-        assert (
-            "M" + ("0" * settings.code_digits + f"{i}")[-settings.code_digits :] in ids
-        )
+        assert "M" + ("0" * settings.code_digits + f"{i}")[-settings.code_digits :] in ids
 
 
 @pytest.mark.parametrize("id", ids)
