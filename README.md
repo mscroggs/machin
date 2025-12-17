@@ -12,5 +12,4 @@ Information about how to contribute to machin-like.org can be found in the [cont
 
 ## Archive
 Archived shapshots machin-like.org and the code used to generate it (including the
-library [arctans](https://github.com/mscroggs/arctans)) can be found on
-[Zenodo](https://zenodo.org/search?q=parent.id%3A17954248&f=allversions%3Atrue&sort=version).
+library [arctans](https://github.com/mscroggs/arctans)) can be found at https://doi.org/10.5281/zenodo.17954248
