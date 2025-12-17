@@ -15,7 +15,7 @@ release = machin.create_git_tag_and_release(
     f"v{version}",
     f"v{version}",
     f"v{version}",
-    f"Snapshot of machin-like.org, {datetime.now().strftime('%d %B %Y')}.\n\nThis release is archived on [Zenodo](https://zenodo.org/search?q=parent.id%3A17954248&f=allversions%3Atrue&sort=version).",
+    f"Snapshot of machin-like.org, {datetime.now().strftime('%d %B %Y')}.\n\nThis release is archived at https://doi.org/10.5281/zenodo.17954248",
     branch.commit.sha,
     "commit",
 )
