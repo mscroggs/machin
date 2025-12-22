@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "upload_type": "software",
+    "license": "mit",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Scroggs, Matthew W.",
+        "affiliation": "University College London",
+        "orcid": "0000-0002-4658-2443"
+      },
+      {
+        "name": "Steckles, Katie",
+        "affiliation": "Manchester Metropolitan University",
+        "orcid": "0009-0006-6022-4788"
+      },
+    ],
+    "title": "machin-like.org",
+    "version": "2025.12",
+    "publication_date": "2025-12-01",
+  }
+}
